@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 type Candidato = {
@@ -20,102 +20,45 @@ type Partido = {
   candidatos: Candidato[];
 };
 
+const partidosDemo: Partido[] = [
+  {
+    id: 1,
+    nombre: "Lista A",
+    siglas: "A",
+    descripcion: "Descripción breve de la lista o partido.",
+    color: "bg-blue-600",
+    candidatos: [
+      { id: 1, nombre: "Candidato 1", cargo: "Cargo principal", cedula: "" },
+      { id: 2, nombre: "Candidato 2", cargo: "Cargo secundario", cedula: "" },
+    ],
+  },
+  {
+    id: 2,
+    nombre: "Lista B",
+    siglas: "B",
+    descripcion: "Descripción breve de la lista o partido.",
+    color: "bg-emerald-600",
+    candidatos: [
+      { id: 3, nombre: "Candidato 1", cargo: "Cargo principal", cedula: "" },
+      { id: 4, nombre: "Candidato 2", cargo: "Cargo secundario", cedula: "" },
+    ],
+  },
+  {
+    id: 3,
+    nombre: "Voto en blanco",
+    siglas: "VB",
+    descripcion: "Opción visual para voto en blanco.",
+    color: "bg-slate-500",
+    candidatos: [],
+  },
+];
 export default function Votacion() {
   const router = useRouter();
 
-  const [partidos, setPartidos] = useState<Partido[]>([]);
   const [partidoSeleccionado, setPartidoSeleccionado] =
-    useState<Partido | null>(null);
+    useState<Partido | null>(partidosDemo[0]);
+
   const [mostrarConfirmacion, setMostrarConfirmacion] = useState(false);
-  const [permitirBlanco, setPermitirBlanco] = useState(false);
-
-  useEffect(() => {
-    const modo = localStorage.getItem("modoSistema") || "empresarial";
-
-    const key =
-      modo === "empresarial"
-        ? "partidos_empresarial"
-        : "partidos_territorial";
-
-    const data = localStorage.getItem(key);
-
-    if (data) {
-      const partidosAdmin = JSON.parse(data);
-
-      const adaptados: Partido[] = partidosAdmin.map((p: any) => ({
-        id: p.id,
-        nombre: p.nombre,
-        siglas: p.nombre.substring(0, 2).toUpperCase(),
-        descripcion: p.descripcion || "Sin descripción.",
-        color: "bg-blue-600",
-        logo: p.logo,
-        candidatos: (p.integrantes || []).map((i: any, index: number) => ({
-          id: index + 1,
-          nombre: i.nombre,
-          cargo: i.funcion || "Candidato",
-          cedula: i.cedula || "",
-        })),
-      }));
-
-      setPartidos(adaptados);
-      setPartidoSeleccionado(adaptados[0] || null);
-    } else {
-      setPartidos([]);
-      setPartidoSeleccionado(null);
-    }
-  }, []);
-
-  useEffect(() => {
-    const modo = localStorage.getItem("modoSistema") || "empresarial";
-
-    const key =
-      modo === "empresarial" ? "config_empresarial" : "config_territorial";
-
-    const data = localStorage.getItem(key);
-
-    if (data) {
-      const config = JSON.parse(data);
-      setPermitirBlanco(config.permitirBlanco || false);
-    } else {
-      setPermitirBlanco(false);
-    }
-  }, []);
-
-  const confirmarVoto = () => {
-    const cedula = localStorage.getItem("cedulaVotante");
-
-    if (!cedula) {
-      alert("No se encontró la cédula.");
-      return;
-    }
-
-    const yaVoto = localStorage.getItem(`yaVoto_${cedula}`);
-
-    if (yaVoto) {
-      alert("Ya has votado anteriormente.");
-      return;
-    }
-
-    if (!partidoSeleccionado) {
-      alert("Selecciona una opción.");
-      return;
-    }
-
-    const modo = localStorage.getItem("modoSistema") || "empresarial";
-
-    const votosKey =
-      modo === "empresarial" ? "votos_empresarial" : "votos_territorial";
-
-    const votos = JSON.parse(localStorage.getItem(votosKey) || "{}");
-
-    votos[partidoSeleccionado.id] =
-      (votos[partidoSeleccionado.id] || 0) + 1;
-
-    localStorage.setItem(votosKey, JSON.stringify(votos));
-    localStorage.setItem(`yaVoto_${cedula}`, "true");
-
-    router.push("/confirmacion");
-  };
 
   return (
     <main className="min-h-screen bg-slate-950 text-white">
@@ -141,7 +84,7 @@ export default function Votacion() {
             Elige la lista o partido de tu preferencia
           </h2>
           <p className="mt-2 text-slate-300">
-            Revisa la información registrada antes de confirmar tu voto.
+            Revisa la información visual antes de confirmar tu voto.
           </p>
         </div>
 
@@ -149,11 +92,11 @@ export default function Votacion() {
           <aside className="rounded-[2rem] border border-white/10 bg-white p-6 text-slate-900 shadow-xl lg:col-span-1">
             <h3 className="text-xl font-bold">Partidos / Listas</h3>
             <p className="mt-1 text-sm text-slate-500">
-              Selecciona una opción para ver sus integrantes.
+              Selecciona una opción para visualizar su información.
             </p>
 
             <div className="mt-6 space-y-3">
-              {partidos.map((partido) => (
+              {partidosDemo.map((partido) => (
                 <button
                   key={partido.id}
                   onClick={() => setPartidoSeleccionado(partido)}
@@ -164,19 +107,11 @@ export default function Votacion() {
                   }`}
                 >
                   <div className="flex items-center gap-4">
-                    {partido.logo ? (
-                      <img
-                        src={partido.logo}
-                        alt={`Logo de ${partido.nombre}`}
-                        className="h-14 w-14 rounded-xl border border-slate-200 bg-white object-contain p-1"
-                      />
-                    ) : (
-                      <div
-                        className={`flex h-14 w-14 items-center justify-center rounded-xl font-bold text-white ${partido.color}`}
-                      >
-                        {partido.siglas}
-                      </div>
-                    )}
+                    <div
+                      className={`flex h-14 w-14 items-center justify-center rounded-xl font-bold text-white ${partido.color}`}
+                    >
+                      {partido.siglas}
+                    </div>
 
                     <div>
                       <h4 className="font-bold text-slate-900">
@@ -189,47 +124,11 @@ export default function Votacion() {
                   </div>
                 </button>
               ))}
-
-              {permitirBlanco && (
-                <button
-                  onClick={() =>
-                    setPartidoSeleccionado({
-                      id: 0,
-                      nombre: "Voto en blanco",
-                      siglas: "VB",
-                      descripcion:
-                        "Has elegido no seleccionar ningún partido.",
-                      color: "bg-slate-500",
-                      candidatos: [],
-                    })
-                  }
-                  className={`w-full rounded-2xl border p-4 text-left transition hover:-translate-y-0.5 hover:shadow-md ${
-                    partidoSeleccionado?.id === 0
-                      ? "border-slate-500 bg-slate-100 shadow-md"
-                      : "border-slate-200 bg-slate-50"
-                  }`}
-                >
-                  <div className="flex items-center gap-4">
-                    <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-slate-500 font-bold text-white">
-                      VB
-                    </div>
-
-                    <div>
-                      <h4 className="font-bold text-slate-900">
-                        Voto en blanco
-                      </h4>
-                      <p className="text-sm text-slate-500">
-                        No seleccionar ningún partido
-                      </p>
-                    </div>
-                  </div>
-                </button>
-              )}
             </div>
           </aside>
 
           <section className="rounded-[2rem] border border-white/10 bg-white p-8 text-slate-900 shadow-xl lg:col-span-2">
-            {partidoSeleccionado ? (
+            {partidoSeleccionado && (
               <>
                 <div className="flex flex-col gap-5 border-b border-slate-200 pb-6 md:flex-row md:items-center md:justify-between">
                   <div>
@@ -246,22 +145,14 @@ export default function Votacion() {
                     </p>
                   </div>
 
-                  {partidoSeleccionado.logo ? (
-                    <img
-                      src={partidoSeleccionado.logo}
-                      alt={`Logo de ${partidoSeleccionado.nombre}`}
-                      className="h-24 w-24 rounded-2xl border border-slate-200 bg-white object-contain p-2 shadow-sm"
-                    />
-                  ) : (
-                    <div
-                      className={`flex h-24 w-24 items-center justify-center rounded-2xl text-2xl font-bold text-white shadow-md ${partidoSeleccionado.color}`}
-                    >
-                      {partidoSeleccionado.siglas}
-                    </div>
-                  )}
+                  <div
+                    className={`flex h-24 w-24 items-center justify-center rounded-2xl text-2xl font-bold text-white shadow-md ${partidoSeleccionado.color}`}
+                  >
+                    {partidoSeleccionado.siglas}
+                  </div>
                 </div>
 
-                {partidoSeleccionado.id !== 0 && (
+                {partidoSeleccionado.candidatos.length > 0 && (
                   <div className="mt-7">
                     <h3 className="text-lg font-bold text-slate-900">
                       Candidatos registrados
@@ -291,9 +182,7 @@ export default function Votacion() {
                 )}
 
                 <div className="mt-8 rounded-2xl bg-slate-50 p-5">
-                  <p className="text-sm text-slate-500">
-                    Una vez confirmado, el voto no podrá modificarse.
-                  </p>
+                 
                 </div>
 
                 <button
@@ -303,15 +192,6 @@ export default function Votacion() {
                   Votar por {partidoSeleccionado.nombre}
                 </button>
               </>
-            ) : (
-              <div className="rounded-2xl border border-dashed border-slate-300 bg-slate-50 p-8 text-center">
-                <p className="font-semibold text-slate-700">
-                  No hay opciones disponibles
-                </p>
-                <p className="mt-2 text-sm text-slate-500">
-                  El administrador aún no ha registrado partidos para este modo.
-                </p>
-              </div>
             )}
           </section>
         </div>
@@ -336,9 +216,7 @@ export default function Votacion() {
               ?
             </p>
 
-            <p className="mt-2 text-center text-sm text-slate-400">
-              Esta acción no se puede deshacer.
-            </p>
+           
 
             <div className="mt-7 flex gap-3">
               <button
@@ -349,7 +227,7 @@ export default function Votacion() {
               </button>
 
               <button
-                onClick={confirmarVoto}
+                onClick={() => router.push("/confirmacion")}
                 className="flex-1 rounded-xl bg-green-600 py-3 font-bold text-white transition hover:bg-green-700"
               >
                 Confirmar

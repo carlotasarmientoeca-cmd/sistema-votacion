@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 type ModoSistema = "empresarial" | "territorial";
@@ -12,46 +12,14 @@ type Integrante = {
   funcion: string;
 };
 
-type Partido = {
-  id: number;
-  nombre: string;
-  logo: string;
-  descripcion: string;
-  integrantes: Integrante[];
-};
-
 export default function AdminDashboard() {
   const router = useRouter();
 
- const [modo, setModo] = useState<ModoSistema>(() => {
-  if (typeof window !== "undefined") {
-    const modoGuardado = localStorage.getItem("modoSistema");
-
-    if (modoGuardado === "empresarial" || modoGuardado === "territorial") {
-      return modoGuardado;
-    }
-  }
-
-  return "empresarial";
-});
+  const [modo, setModo] = useState<ModoSistema>("empresarial");
   const [seccion, setSeccion] = useState<Seccion>("resumen");
-const partidosKey =
-  modo === "empresarial"
-    ? "partidos_empresarial"
-    : "partidos_territorial";
-    const votosKey =
-  modo === "empresarial"
-    ? "votos_empresarial"
-    : "votos_territorial";
-
-    const configKey =
-  modo === "empresarial"
-    ? "config_empresarial"
-    : "config_territorial";
-
-  const [partidos, setPartidos] = useState<Partido[]>([]);
   const [permitirBlanco, setPermitirBlanco] = useState(false);
-  const [votos, setVotos] = useState<{ [key: number]: number }>({});
+  const [mensaje, setMensaje] = useState("");
+
   const [nombrePartido, setNombrePartido] = useState("");
   const [logo, setLogo] = useState("");
   const [descripcion, setDescripcion] = useState("");
@@ -59,36 +27,6 @@ const partidosKey =
   const [integrantes, setIntegrantes] = useState<Integrante[]>([
     { nombre: "", cedula: "", funcion: "" },
   ]);
-
-  useEffect(() => {
-  const data = localStorage.getItem(partidosKey);
-
-  if (data) {
-    setPartidos(JSON.parse(data));
-  } else {
-    setPartidos([]);
-  }
-}, [partidosKey]);
-useEffect(() => {
-  const data = localStorage.getItem(votosKey);
-
-  if (data) {
-    setVotos(JSON.parse(data));
-  } else {
-    setVotos({});
-  }
-}, [votosKey]);
-useEffect(() => {
-  const data = localStorage.getItem(configKey);
-
-  if (data) {
-    const config = JSON.parse(data);
-    setPermitirBlanco(config.permitirBlanco ?? false);
-  } else {
-    setPermitirBlanco(false);
-  }
-}, [configKey, modo]);
-
 
   const actualizarIntegrante = (
     index: number,
@@ -104,46 +42,16 @@ useEffect(() => {
     setIntegrantes([...integrantes, { nombre: "", cedula: "", funcion: "" }]);
   };
 
-  const guardarPartido = () => {
-    if (!nombrePartido.trim()) {
-      alert("Ingresa el nombre del partido o lista.");
-      return;
-    }
-
-    const integrantesValidos = integrantes.filter(
-      (i) => i.nombre.trim() && i.cedula.trim() && i.funcion.trim()
-    );
-
-    const nuevoPartido: Partido = {
-      id: Date.now(),
-      nombre: nombrePartido,
-      logo,
-      descripcion,
-      integrantes: integrantesValidos,
-    };
-
-    const partidosActualizados = [...partidos, nuevoPartido];
-
-    setPartidos(partidosActualizados);
-   localStorage.setItem(partidosKey, JSON.stringify(partidosActualizados));
-
+  const guardarVisual = () => {
     setNombrePartido("");
     setLogo("");
     setDescripcion("");
     setIntegrantes([{ nombre: "", cedula: "", funcion: "" }]);
-  };
+    setMensaje("Formulario listo visualmente.");
 
-  const eliminarPartido = (id: number) => {
-    const confirmar = confirm("¿Seguro que deseas eliminar este partido?");
-
-    if (!confirmar) return;
-
-    const partidosActualizados = partidos.filter(
-      (partido) => partido.id !== id
-    );
-
-    setPartidos(partidosActualizados);
-   localStorage.setItem(partidosKey, JSON.stringify(partidosActualizados));
+    setTimeout(() => {
+      setMensaje("");
+    }, 2500);
   };
 
   const menu = [
@@ -151,22 +59,6 @@ useEffect(() => {
     { id: "partidos", label: "Partidos / Listas", icon: "🗳️" },
     { id: "resultados", label: "Resultados", icon: "📈" },
   ] as { id: Seccion; label: string; icon: string }[];
-
-  const totalVotos = Object.values(votos).reduce(
-  (acc, val) => acc + val,
-  0
-);
-const partidoGanador = partidos.reduce<Partido | null>((ganador, partido) => {
-  const votosPartido = votos[partido.id] || 0;
-  const votosGanador = ganador ? votos[ganador.id] || 0 : -1;
-
-  return votosPartido > votosGanador ? partido : ganador;
-}, null);
-
-const votosGanador = partidoGanador ? votos[partidoGanador.id] || 0 : 0;
-
-const porcentajeGanador =
-  totalVotos > 0 ? (votosGanador / totalVotos) * 100 : 0;
 
   return (
     <main className="min-h-screen bg-slate-100">
@@ -180,10 +72,7 @@ const porcentajeGanador =
 
         <div className="mt-8 rounded-3xl bg-slate-50 p-3">
           <button
-            onClick={() => {
-  setModo("empresarial");
-  localStorage.setItem("modoSistema", "empresarial");
-}}
+            onClick={() => setModo("empresarial")}
             className={`w-full rounded-2xl px-4 py-3 text-left text-sm font-semibold transition ${
               modo === "empresarial"
                 ? "bg-blue-600 text-white shadow-md shadow-blue-600/30"
@@ -194,10 +83,7 @@ const porcentajeGanador =
           </button>
 
           <button
-            onClick={() => {
-  setModo("territorial");
-  localStorage.setItem("modoSistema", "territorial");
-}}
+            onClick={() => setModo("territorial")}
             className={`mt-2 w-full rounded-2xl px-4 py-3 text-left text-sm font-semibold transition ${
               modo === "territorial"
                 ? "bg-blue-600 text-white shadow-md shadow-blue-600/30"
@@ -238,10 +124,10 @@ const porcentajeGanador =
           <div className="mx-auto flex max-w-7xl flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div>
               <h2 className="text-2xl font-extrabold text-slate-900">
-                Dashboard administrativo
+                Administración
               </h2>
               <p className="text-sm text-slate-500">
-                Configura el proceso electoral y revisa la información visual.
+                Panel visual del proceso electoral.
               </p>
             </div>
 
@@ -256,10 +142,7 @@ const porcentajeGanador =
           <div className="mb-6 grid gap-3 lg:hidden">
             <div className="grid grid-cols-2 gap-3">
               <button
-               onClick={() => {
-  setModo("empresarial");
-  localStorage.setItem("modoSistema", "empresarial");
-}}
+                onClick={() => setModo("empresarial")}
                 className={`rounded-2xl px-4 py-3 font-semibold transition ${
                   modo === "empresarial"
                     ? "bg-blue-600 text-white shadow-md shadow-blue-600/30"
@@ -302,11 +185,7 @@ const porcentajeGanador =
             <div>
               <h3 className="text-2xl font-bold text-slate-900">Resumen</h3>
 
-              <div
-                className={`mt-6 grid gap-5 ${
-                  modo === "territorial" ? "md:grid-cols-2" : "md:grid-cols-2"
-                }`}
-              >
+              <div className="mt-6 grid gap-5 md:grid-cols-2">
                 <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-md transition hover:-translate-y-1 hover:shadow-lg">
                   <p className="text-sm text-slate-500">Tipo de proceso</p>
                   <p className="mt-2 text-2xl font-extrabold text-blue-700">
@@ -319,7 +198,7 @@ const porcentajeGanador =
                     Partidos / listas registradas
                   </p>
                   <p className="mt-2 text-2xl font-extrabold text-emerald-600">
-                    {partidos.length}
+                    0
                   </p>
                 </div>
               </div>
@@ -329,37 +208,26 @@ const porcentajeGanador =
                   Partidos registrados
                 </h4>
 
-                <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                  {partidos.length === 0 ? (
-                    <p className="text-sm text-slate-400">
-                      No hay partidos registrados aún.
-                    </p>
-                  ) : (
-                    partidos.map((p) => (
-                      <div
-                        key={p.id}
-                        className="flex flex-col items-center justify-center rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:scale-[1.02] hover:shadow-md"
-                      >
-                        {p.logo ? (
-                          <img
-                            src={p.logo}
-                            alt={`Logo de ${p.nombre}`}
-                            className="mb-3 h-16 w-16 object-contain"
-                          />
-                        ) : (
-                          <div className="mb-3 flex h-16 w-16 items-center justify-center rounded-xl bg-blue-600 text-lg font-bold text-white">
-                            {p.nombre.substring(0, 2).toUpperCase()}
-                          </div>
-                        )}
-
-                        <p className="text-center font-semibold text-slate-800">
-                          {p.nombre}
-                        </p>
-                      </div>
-                    ))
-                  )}
+                <div className="mt-6 flex min-h-40 items-center justify-center rounded-2xl border border-dashed border-slate-300 bg-slate-50 text-center">
+                  <p className="text-sm text-slate-400">
+                    No hay partidos registrados.
+                  </p>
                 </div>
               </div>
+
+              {modo === "territorial" && (
+                <div className="mt-6 rounded-3xl border border-slate-200 bg-white p-6 shadow-md transition hover:-translate-y-1 hover:shadow-lg">
+                  <h4 className="text-lg font-bold text-slate-900">
+                    Regiones registradas
+                  </h4>
+
+                  <div className="mt-6 flex min-h-32 items-center justify-center rounded-2xl border border-dashed border-slate-300 bg-slate-50 text-center">
+                    <p className="text-sm text-slate-400">
+                      No hay regiones registradas.
+                    </p>
+                  </div>
+                </div>
+              )}
             </div>
           )}
 
@@ -369,10 +237,12 @@ const porcentajeGanador =
                 <h3 className="text-2xl font-bold text-slate-900">
                   Registrar partido o lista
                 </h3>
-                <p className="mt-2 text-sm text-slate-500">
-                  Aquí el administrador carga la información que luego usará el
-                  backend.
-                </p>
+
+                {mensaje && (
+                  <div className="mt-4 rounded-2xl border border-blue-200 bg-blue-50 px-4 py-3 text-sm font-semibold text-blue-700">
+                    {mensaje}
+                  </div>
+                )}
 
                 <div className="mt-6 grid gap-4 md:grid-cols-2">
                   <div>
@@ -382,7 +252,7 @@ const porcentajeGanador =
                     <input
                       value={nombrePartido}
                       onChange={(e) => setNombrePartido(e.target.value)}
-                      placeholder="Ej: Movimiento Futuro"
+                      placeholder="Nombre del partido o lista"
                       className="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
@@ -394,7 +264,7 @@ const porcentajeGanador =
                     <input
                       value={logo}
                       onChange={(e) => setLogo(e.target.value)}
-                      placeholder="URL del logo o archivo luego"
+                      placeholder="URL o archivo"
                       className="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
@@ -406,7 +276,7 @@ const porcentajeGanador =
                     <textarea
                       value={descripcion}
                       onChange={(e) => setDescripcion(e.target.value)}
-                      placeholder="Describe la lista, campaña o partido político."
+                      placeholder="Descripción del partido o lista"
                       className="mt-2 h-28 w-full rounded-xl border border-slate-300 px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
@@ -417,6 +287,7 @@ const porcentajeGanador =
                     <h4 className="font-bold text-slate-900">
                       Integrantes / candidatos
                     </h4>
+
                     <button
                       onClick={agregarIntegrante}
                       className="rounded-xl bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-700 transition hover:bg-blue-100 hover:shadow-sm"
@@ -475,44 +346,34 @@ const porcentajeGanador =
                 </div>
 
                 <button
-                  onClick={guardarPartido}
+                  onClick={guardarVisual}
                   className="mt-6 w-full rounded-2xl bg-blue-600 py-4 font-semibold text-white shadow-lg shadow-blue-600/30 transition hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-xl"
                 >
                   Guardar partido / lista
                 </button>
-<div className="mt-8 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-  <h4 className="text-sm font-semibold text-slate-700">
-    Configuración del proceso
-  </h4>
 
-  <div className="mt-4 flex items-center justify-between">
-    <span className="text-sm text-slate-600">
-      Permitir voto en blanco
-    </span>
+                <div className="mt-8 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+                  <h4 className="text-sm font-semibold text-slate-700">
+                    Configuración del proceso
+                  </h4>
 
-    <button
-     onClick={() => {
-  const nuevoValor = !permitirBlanco;
+                  <div className="mt-4 flex items-center justify-between">
+                    <span className="text-sm text-slate-600">
+                      Permitir voto en blanco
+                    </span>
 
-  setPermitirBlanco(nuevoValor);
-
-  localStorage.setItem(
-    configKey,
-    JSON.stringify({ permitirBlanco: nuevoValor })
-  );
-}}
-      className={`px-4 py-1 rounded-full text-sm font-semibold transition ${
-        permitirBlanco
-          ? "bg-green-100 text-green-700"
-          : "bg-slate-200 text-slate-600"
-      }`}
-    >
-      {permitirBlanco ? "Activado" : "Desactivado"}
-    </button>
-  </div>
-  
-</div>
-
+                    <button
+                      onClick={() => setPermitirBlanco(!permitirBlanco)}
+                      className={`rounded-full px-4 py-1 text-sm font-semibold transition ${
+                        permitirBlanco
+                          ? "bg-green-100 text-green-700"
+                          : "bg-slate-200 text-slate-600"
+                      }`}
+                    >
+                      {permitirBlanco ? "Activado" : "Desactivado"}
+                    </button>
+                  </div>
+                </div>
               </section>
 
               <aside className="rounded-3xl border border-slate-200 bg-white p-6 shadow-md transition hover:-translate-y-1 hover:shadow-lg xl:col-span-2">
@@ -520,55 +381,11 @@ const porcentajeGanador =
                   Partidos registrados
                 </h3>
 
-                {partidos.length === 0 ? (
-                  <p className="mt-4 text-sm text-slate-400">
-                    Aún no hay partidos registrados.
+                <div className="mt-4 flex min-h-72 items-center justify-center rounded-2xl border border-dashed border-slate-300 bg-slate-50 text-center">
+                  <p className="text-sm text-slate-400">
+                    No hay partidos registrados.
                   </p>
-                ) : (
-                  <div className="mt-4 space-y-4">
-                    {partidos.map((partido) => (
-                      <div
-                        key={partido.id}
-                        className="rounded-2xl border border-slate-200 bg-slate-50 p-4"
-                      >
-                        <h4 className="font-bold text-slate-900">
-                          {partido.nombre}
-                        </h4>
-
-                        <button
-                          onClick={() => eliminarPartido(partido.id)}
-                          className="mt-2 text-xs font-semibold text-red-500 transition hover:text-red-700 hover:underline"
-                        >
-                          Eliminar
-                        </button>
-
-                        <p className="mt-1 text-sm text-slate-500">
-                          {partido.descripcion || "Sin descripción"}
-                        </p>
-
-                        <div className="mt-3">
-                          <p className="text-xs font-bold uppercase text-slate-400">
-                            Integrantes
-                          </p>
-                          {partido.integrantes.length === 0 ? (
-                            <p className="mt-1 text-sm text-slate-400">
-                              Sin integrantes completos.
-                            </p>
-                          ) : (
-                            partido.integrantes.map((i, index) => (
-                              <p
-                                key={index}
-                                className="mt-1 text-sm text-slate-600"
-                              >
-                                • {i.nombre} — {i.funcion}
-                              </p>
-                            ))
-                          )}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
+                </div>
               </aside>
             </div>
           )}
@@ -576,70 +393,15 @@ const porcentajeGanador =
           {seccion === "resultados" && (
             <div className="grid gap-6 xl:grid-cols-5">
               <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-md transition hover:-translate-y-1 hover:shadow-lg xl:col-span-3">
-               
                 <h3 className="text-2xl font-bold text-slate-900">
                   Resultados visuales
                 </h3>
-                <p className="mt-2 text-sm text-slate-500">
-                  Vista previa de resultados. Luego se conectará con datos
-                  reales.
-                </p>
 
-               <div className="mt-8 space-y-6">
-  {partidos.length === 0 ? (
-    <p className="text-sm text-slate-400">
-      Aún no hay partidos registrados.
-    </p>
-  ) : (
-    
-    (permitirBlanco
-  ? [
-      ...partidos,
-      {
-        id: 0,
-        nombre: "Voto en blanco",
-        logo: "",
-        descripcion: "Votos emitidos sin seleccionar un partido.",
-        integrantes: [],
-      },
-    ]
-  : partidos
-).map((partido, index) => {
-      const votosPartido = votos[partido.id] || 0;
-
-      const porcentaje =
-        totalVotos > 0 ? (votosPartido / totalVotos) * 100 : 0;
-
-      return (
-        <div
-  key={partido.id}
-  className={`p-2 rounded-xl ${
-    partidoGanador?.id === partido.id
-      ? "bg-yellow-50 border border-yellow-300"
-      : ""
-  }`}
->
-          <div className="mb-2 flex justify-between text-sm">
-            <span className="font-semibold text-slate-700">
-              {partido.nombre}
-            </span>
-
-            <span className="text-slate-500">
-              {votosPartido} votos · {porcentaje.toFixed(1)}%
-            </span>
-          </div>
-
-          <div className="h-5 overflow-hidden rounded-full bg-slate-100">
-            <div
-  className="h-full rounded-full bg-blue-600 transition-all duration-700 ease-out"
-  style={{ width: `${porcentaje}%` }}
-/>
-          </div>
-        </div>
-      );
-    })
-  )}
-</div>
+                <div className="mt-8 flex min-h-72 items-center justify-center rounded-2xl border border-dashed border-slate-300 bg-slate-50 text-center">
+                  <p className="text-sm text-slate-400">
+                    No hay resultados disponibles.
+                  </p>
+                </div>
               </section>
 
               <aside className="rounded-3xl border border-slate-200 bg-white p-6 shadow-md transition hover:-translate-y-1 hover:shadow-lg xl:col-span-2">
@@ -648,58 +410,21 @@ const porcentajeGanador =
                 </h3>
 
                 {modo === "empresarial" ? (
-  <div className="mt-6 rounded-3xl bg-gradient-to-br from-yellow-50 to-white p-6 text-center border border-yellow-200 shadow-md">
-
-    <p className="text-sm font-semibold text-yellow-600">
-      🏆 Ganador actual
-    </p>
-
-    <div className="mt-5 flex flex-col items-center">
-
-      {partidoGanador?.logo ? (
-        <img
-          src={partidoGanador.logo}
-          alt={partidoGanador.nombre}
-          className="h-16 w-16 object-contain mb-3"
-        />
-      ) : (
-        <div className="mb-3 flex h-16 w-16 items-center justify-center rounded-full bg-yellow-400 text-white font-bold text-xl">
-          {partidoGanador
-            ? partidoGanador.nombre.substring(0, 2).toUpperCase()
-            : "--"}
-        </div>
-      )}
-
-      <h3 className="text-xl font-extrabold text-slate-900">
-        {partidoGanador ? partidoGanador.nombre : "Sin datos"}
-      </h3>
-
-      <p className="mt-2 text-3xl font-extrabold text-yellow-600">
-        {porcentajeGanador.toFixed(1)}%
-      </p>
-
-      <p className="mt-1 text-sm text-slate-500">
-        Mayor intención de voto
-      </p>
-
-    </div>
-  </div>
+                  <div className="mt-6 flex h-72 items-center justify-center rounded-3xl border border-dashed border-slate-300 bg-slate-50 text-center">
+                    <p className="text-sm text-slate-400">
+                      Sin información empresarial.
+                    </p>
+                  </div>
                 ) : (
                   <div className="mt-6 rounded-3xl bg-slate-50 p-5">
-                    <p className="mt-2 text-sm text-slate-500">
-                      El mapa mostrará el porcentaje de votos según la
-                      provincia, ciudad o región seleccionada.
-                    </p>
-
-                    <div className="mt-6 flex h-72 items-center justify-center rounded-3xl border-2 border-dashed border-slate-300 bg-white text-center">
+                    <div className="flex h-72 items-center justify-center rounded-3xl border-2 border-dashed border-slate-300 bg-white text-center">
                       <div>
                         <p className="text-4xl">🗺️</p>
                         <p className="mt-3 font-bold text-slate-700">
-                          Espacio para cargar mapa territorial
+                          Espacio para mapa territorial
                         </p>
                         <p className="mt-1 text-sm text-slate-500">
-                          Aquí se cargará el mapa real de provincias, ciudades o
-                          regiones.
+                          Provincias, ciudades o regiones
                         </p>
                       </div>
                     </div>
