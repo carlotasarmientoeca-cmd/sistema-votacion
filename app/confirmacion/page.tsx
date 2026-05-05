@@ -14,14 +14,12 @@ export default function Confirmacion() {
         </div>
 
         <h1 className="mt-6 text-2xl font-bold text-slate-900">
-          Voto registrado
+          Proceso completado
         </h1>
 
         <p className="mt-3 text-slate-500">
-          Tu selección ha sido procesada correctamente.
+          Tu selección ha sido registrada .
         </p>
-
-        
 
         <button
           onClick={() => router.push("/")}

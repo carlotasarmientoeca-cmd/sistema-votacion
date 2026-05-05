@@ -47,7 +47,7 @@ export default function AdminDashboard() {
     setLogo("");
     setDescripcion("");
     setIntegrantes([{ nombre: "", cedula: "", funcion: "" }]);
-    setMensaje("Formulario listo visualmente.");
+    setMensaje("Formulario completado.");
 
     setTimeout(() => {
       setMensaje("");
@@ -126,9 +126,7 @@ export default function AdminDashboard() {
               <h2 className="text-2xl font-extrabold text-slate-900">
                 Administración
               </h2>
-              <p className="text-sm text-slate-500">
-                Panel visual del proceso electoral.
-              </p>
+             
             </div>
 
             <div className="rounded-full bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-700">
@@ -394,7 +392,7 @@ export default function AdminDashboard() {
             <div className="grid gap-6 xl:grid-cols-5">
               <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-md transition hover:-translate-y-1 hover:shadow-lg xl:col-span-3">
                 <h3 className="text-2xl font-bold text-slate-900">
-                  Resultados visuales
+                  Resultados 
                 </h3>
 
                 <div className="mt-8 flex min-h-72 items-center justify-center rounded-2xl border border-dashed border-slate-300 bg-slate-50 text-center">
