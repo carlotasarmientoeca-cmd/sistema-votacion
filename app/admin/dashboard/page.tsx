@@ -3,8 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-type ModoSistema = "empresarial" | "territorial";
-type Seccion = "resumen" | "partidos" | "resultados";
+type Seccion = "partidos" | "resultados";
 
 type Integrante = {
   nombre: string;
@@ -15,8 +14,7 @@ type Integrante = {
 export default function AdminDashboard() {
   const router = useRouter();
 
-  const [modo, setModo] = useState<ModoSistema>("empresarial");
-  const [seccion, setSeccion] = useState<Seccion>("resumen");
+  const [seccion, setSeccion] = useState<Seccion>("partidos");
   const [permitirBlanco, setPermitirBlanco] = useState(false);
   const [mensaje, setMensaje] = useState("");
 
@@ -55,7 +53,6 @@ export default function AdminDashboard() {
   };
 
   const menu = [
-    { id: "resumen", label: "Resumen", icon: "📊" },
     { id: "partidos", label: "Partidos / Listas", icon: "🗳️" },
     { id: "resultados", label: "Resultados", icon: "📈" },
   ] as { id: Seccion; label: string; icon: string }[];
@@ -70,31 +67,7 @@ export default function AdminDashboard() {
           <p className="mt-1 text-sm text-slate-500">Panel administrador</p>
         </div>
 
-        <div className="mt-8 rounded-3xl bg-slate-50 p-3">
-          <button
-            onClick={() => setModo("empresarial")}
-            className={`w-full rounded-2xl px-4 py-3 text-left text-sm font-semibold transition ${
-              modo === "empresarial"
-                ? "bg-blue-600 text-white shadow-md shadow-blue-600/30"
-                : "text-slate-600 hover:bg-white hover:shadow-sm"
-            }`}
-          >
-            🏢 Empresarial
-          </button>
-
-          <button
-            onClick={() => setModo("territorial")}
-            className={`mt-2 w-full rounded-2xl px-4 py-3 text-left text-sm font-semibold transition ${
-              modo === "territorial"
-                ? "bg-blue-600 text-white shadow-md shadow-blue-600/30"
-                : "text-slate-600 hover:bg-white hover:shadow-sm"
-            }`}
-          >
-            🌎 Territorial
-          </button>
-        </div>
-
-        <nav className="mt-8 space-y-2">
+        <nav className="mt-10 space-y-2">
           {menu.map((item) => (
             <button
               key={item.id}
@@ -121,113 +94,34 @@ export default function AdminDashboard() {
 
       <section className="lg:ml-72">
         <header className="border-b bg-white px-6 py-5">
-          <div className="mx-auto flex max-w-7xl flex-col gap-4 md:flex-row md:items-center md:justify-between">
+          <div className="mx-auto flex max-w-7xl items-center justify-between">
             <div>
               <h2 className="text-2xl font-extrabold text-slate-900">
                 Administración
               </h2>
-             
-            </div>
-
-            <div className="rounded-full bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-700">
-              Modo activo:{" "}
-              {modo === "empresarial" ? "Empresarial" : "Territorial"}
+              <p className="mt-1 text-sm text-slate-500">
+                Gestión visual del proceso electoral.
+              </p>
             </div>
           </div>
         </header>
 
         <div className="mx-auto max-w-7xl px-6 py-8">
-          <div className="mb-6 grid gap-3 lg:hidden">
-            <div className="grid grid-cols-2 gap-3">
+          <div className="mb-6 flex gap-2 overflow-x-auto lg:hidden">
+            {menu.map((item) => (
               <button
-                onClick={() => setModo("empresarial")}
-                className={`rounded-2xl px-4 py-3 font-semibold transition ${
-                  modo === "empresarial"
+                key={item.id}
+                onClick={() => setSeccion(item.id)}
+                className={`whitespace-nowrap rounded-full px-4 py-2 text-sm font-semibold transition ${
+                  seccion === item.id
                     ? "bg-blue-600 text-white shadow-md shadow-blue-600/30"
                     : "bg-white text-slate-600 hover:shadow-sm"
                 }`}
               >
-                Empresarial
+                {item.icon} {item.label}
               </button>
-
-              <button
-                onClick={() => setModo("territorial")}
-                className={`rounded-2xl px-4 py-3 font-semibold transition ${
-                  modo === "territorial"
-                    ? "bg-blue-600 text-white shadow-md shadow-blue-600/30"
-                    : "bg-white text-slate-600 hover:shadow-sm"
-                }`}
-              >
-                Territorial
-              </button>
-            </div>
-
-            <div className="flex gap-2 overflow-x-auto">
-              {menu.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => setSeccion(item.id)}
-                  className={`whitespace-nowrap rounded-full px-4 py-2 text-sm font-semibold transition ${
-                    seccion === item.id
-                      ? "bg-blue-600 text-white shadow-md shadow-blue-600/30"
-                      : "bg-white text-slate-600 hover:shadow-sm"
-                  }`}
-                >
-                  {item.icon} {item.label}
-                </button>
-              ))}
-            </div>
+            ))}
           </div>
-
-          {seccion === "resumen" && (
-            <div>
-              <h3 className="text-2xl font-bold text-slate-900">Resumen</h3>
-
-              <div className="mt-6 grid gap-5 md:grid-cols-2">
-                <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-md transition hover:-translate-y-1 hover:shadow-lg">
-                  <p className="text-sm text-slate-500">Tipo de proceso</p>
-                  <p className="mt-2 text-2xl font-extrabold text-blue-700">
-                    {modo === "empresarial" ? "Empresarial" : "Territorial"}
-                  </p>
-                </div>
-
-                <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-md transition hover:-translate-y-1 hover:shadow-lg">
-                  <p className="text-sm text-slate-500">
-                    Partidos / listas registradas
-                  </p>
-                  <p className="mt-2 text-2xl font-extrabold text-emerald-600">
-                    0
-                  </p>
-                </div>
-              </div>
-
-              <div className="mt-6 rounded-3xl border border-slate-200 bg-white p-6 shadow-md transition hover:-translate-y-1 hover:shadow-lg">
-                <h4 className="text-lg font-bold text-slate-900">
-                  Partidos registrados
-                </h4>
-
-                <div className="mt-6 flex min-h-40 items-center justify-center rounded-2xl border border-dashed border-slate-300 bg-slate-50 text-center">
-                  <p className="text-sm text-slate-400">
-                    No hay partidos registrados.
-                  </p>
-                </div>
-              </div>
-
-              {modo === "territorial" && (
-                <div className="mt-6 rounded-3xl border border-slate-200 bg-white p-6 shadow-md transition hover:-translate-y-1 hover:shadow-lg">
-                  <h4 className="text-lg font-bold text-slate-900">
-                    Regiones registradas
-                  </h4>
-
-                  <div className="mt-6 flex min-h-32 items-center justify-center rounded-2xl border border-dashed border-slate-300 bg-slate-50 text-center">
-                    <p className="text-sm text-slate-400">
-                      No hay regiones registradas.
-                    </p>
-                  </div>
-                </div>
-              )}
-            </div>
-          )}
 
           {seccion === "partidos" && (
             <div className="grid gap-6 xl:grid-cols-5">
@@ -303,11 +197,7 @@ export default function AdminDashboard() {
                         <input
                           value={integrante.nombre}
                           onChange={(e) =>
-                            actualizarIntegrante(
-                              index,
-                              "nombre",
-                              e.target.value
-                            )
+                            actualizarIntegrante(index, "nombre", e.target.value)
                           }
                           placeholder="Nombre completo"
                           className="rounded-xl border border-slate-300 px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500"
@@ -316,11 +206,7 @@ export default function AdminDashboard() {
                         <input
                           value={integrante.cedula}
                           onChange={(e) =>
-                            actualizarIntegrante(
-                              index,
-                              "cedula",
-                              e.target.value
-                            )
+                            actualizarIntegrante(index, "cedula", e.target.value)
                           }
                           placeholder="Cédula"
                           className="rounded-xl border border-slate-300 px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500"
@@ -329,11 +215,7 @@ export default function AdminDashboard() {
                         <input
                           value={integrante.funcion}
                           onChange={(e) =>
-                            actualizarIntegrante(
-                              index,
-                              "funcion",
-                              e.target.value
-                            )
+                            actualizarIntegrante(index, "funcion", e.target.value)
                           }
                           placeholder="Función / cargo"
                           className="rounded-xl border border-slate-300 px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500"
@@ -352,7 +234,7 @@ export default function AdminDashboard() {
 
                 <div className="mt-8 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
                   <h4 className="text-sm font-semibold text-slate-700">
-                    Configuración del proceso
+                    Configuración visual
                   </h4>
 
                   <div className="mt-4 flex items-center justify-between">
@@ -392,7 +274,7 @@ export default function AdminDashboard() {
             <div className="grid gap-6 xl:grid-cols-5">
               <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-md transition hover:-translate-y-1 hover:shadow-lg xl:col-span-3">
                 <h3 className="text-2xl font-bold text-slate-900">
-                  Resultados 
+                  Resultados
                 </h3>
 
                 <div className="mt-8 flex min-h-72 items-center justify-center rounded-2xl border border-dashed border-slate-300 bg-slate-50 text-center">
@@ -404,30 +286,20 @@ export default function AdminDashboard() {
 
               <aside className="rounded-3xl border border-slate-200 bg-white p-6 shadow-md transition hover:-translate-y-1 hover:shadow-lg xl:col-span-2">
                 <h3 className="text-xl font-bold text-slate-900">
-                  Vista {modo === "empresarial" ? "empresarial" : "territorial"}
+                  Vista general
                 </h3>
 
-                {modo === "empresarial" ? (
-                  <div className="mt-6 flex h-72 items-center justify-center rounded-3xl border border-dashed border-slate-300 bg-slate-50 text-center">
-                    <p className="text-sm text-slate-400">
-                      Sin información empresarial.
+                <div className="mt-6 flex h-72 items-center justify-center rounded-3xl border-2 border-dashed border-slate-300 bg-slate-50 text-center">
+                  <div>
+                    <p className="text-4xl">📊</p>
+                    <p className="mt-3 font-bold text-slate-700">
+                      Espacio para visualización de resultados
+                    </p>
+                    <p className="mt-1 text-sm text-slate-500">
+                      Aquí se mostrarán gráficos, mapa o estadísticas.
                     </p>
                   </div>
-                ) : (
-                  <div className="mt-6 rounded-3xl bg-slate-50 p-5">
-                    <div className="flex h-72 items-center justify-center rounded-3xl border-2 border-dashed border-slate-300 bg-white text-center">
-                      <div>
-                        <p className="text-4xl">🗺️</p>
-                        <p className="mt-3 font-bold text-slate-700">
-                          Espacio para mapa territorial
-                        </p>
-                        <p className="mt-1 text-sm text-slate-500">
-                          Provincias, ciudades o regiones
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                )}
+                </div>
               </aside>
             </div>
           )}
