@@ -1,4 +1,10 @@
+'use client';
+
+import { useRouter } from 'next/navigation';
+
 export default function AdminLogin() {
+  const router = useRouter();
+
   return (
     <main className="flex min-h-screen items-center justify-center bg-slate-950 px-6">
       <section className="w-full max-w-md rounded-[2rem] border border-white/10 bg-white p-8 shadow-2xl">
@@ -41,6 +47,7 @@ export default function AdminLogin() {
         </div>
 
         <button
+          onClick={() => router.push('/admin/dashboard')}
           className="mt-6 w-full rounded-xl bg-blue-600 py-3 font-semibold text-white shadow-lg shadow-blue-600/30 transition hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-xl"
         >
           Ingresar al panel

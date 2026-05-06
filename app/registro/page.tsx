@@ -1,4 +1,10 @@
+'use client';
+
+import { useRouter } from 'next/navigation';
+
 export default function Registro() {
+  const router = useRouter();
+
   return (
     <main className="min-h-screen bg-slate-950 flex items-center justify-center px-6">
       <section className="w-full max-w-md rounded-3xl bg-white p-8 shadow-2xl">
@@ -22,6 +28,7 @@ export default function Registro() {
         />
 
         <button
+          onClick={() => router.push('/votacion')}
           className="mt-6 w-full rounded-xl bg-blue-600 py-3 font-semibold text-white transition hover:bg-blue-700"
         >
           Continuar

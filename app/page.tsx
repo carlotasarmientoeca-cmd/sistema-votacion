@@ -1,4 +1,10 @@
+'use client';
+
+import { useRouter } from 'next/navigation';
+
 export default function Home() {
+  const router = useRouter();
+
   return (
     <main className="min-h-screen overflow-hidden bg-slate-950 text-white">
       <section className="mx-auto grid min-h-screen max-w-7xl items-center gap-12 px-6 py-16 lg:grid-cols-2">
@@ -13,16 +19,20 @@ export default function Home() {
 
           <div className="mt-10">
             <button
+              onClick={() => router.push('/registro')}
               className="inline-flex rounded-2xl bg-blue-600 px-10 py-4 text-lg font-bold text-white shadow-xl shadow-blue-600/30 transition hover:-translate-y-1 hover:bg-blue-700 hover:shadow-2xl"
             >
               Votar ahora
             </button>
 
-            <div className="mt-8">
-              <span className="text-sm text-slate-500">
-                Acceso institucional
-              </span>
-            </div>
+          <div className="mt-8">
+            <button
+              onClick={() => router.push('/admin/login')}
+              className="text-sm text-slate-500 cursor-pointer hover:underline"
+            >
+              Acceso institucional
+            </button>
+          </div>
           </div>
         </div>
 

@@ -1,4 +1,10 @@
+'use client';
+
+import { useRouter } from 'next/navigation';
+
 export default function Confirmacion() {
+  const router = useRouter();
+
   return (
     <main className="min-h-screen flex items-center justify-center bg-slate-950 px-6">
       <div className="w-full max-w-md rounded-3xl bg-white p-8 text-center shadow-2xl">
@@ -16,6 +22,7 @@ export default function Confirmacion() {
         </p>
 
         <button
+          onClick={() => router.push('/')}
           className="mt-6 w-full rounded-xl bg-blue-600 py-3 font-semibold text-white transition hover:bg-blue-700"
         >
           Volver al inicio
