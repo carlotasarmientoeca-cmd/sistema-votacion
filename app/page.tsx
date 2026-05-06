@@ -1,18 +1,4 @@
-"use client";
-
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
-
 export default function Home() {
-  const router = useRouter();
-  const [animar, setAnimar] = useState(false);
-
-  const votar = () => {
-    setAnimar(true);
-    setTimeout(() => router.push("/registro"), 900);
-  };
-
   return (
     <main className="min-h-screen overflow-hidden bg-slate-950 text-white">
       <section className="mx-auto grid min-h-screen max-w-7xl items-center gap-12 px-6 py-16 lg:grid-cols-2">
@@ -27,19 +13,15 @@ export default function Home() {
 
           <div className="mt-10">
             <button
-              onClick={votar}
               className="inline-flex rounded-2xl bg-blue-600 px-10 py-4 text-lg font-bold text-white shadow-xl shadow-blue-600/30 transition hover:-translate-y-1 hover:bg-blue-700 hover:shadow-2xl"
             >
               Votar ahora
             </button>
 
             <div className="mt-8">
-              <Link
-                href="/admin/login"
-                className="text-sm text-slate-500 transition hover:text-blue-300"
-              >
+              <span className="text-sm text-slate-500">
                 Acceso institucional
-              </Link>
+              </span>
             </div>
           </div>
         </div>
@@ -68,13 +50,7 @@ export default function Home() {
               </div>
 
               {/* Papeleta */}
-              <div
-                className={`absolute left-1/2 z-20 h-44 w-28 -translate-x-1/2 rounded-md border border-yellow-300 bg-yellow-100 shadow-2xl transition-all duration-700 ease-in-out ${
-                  animar
-                    ? "top-[185px] scale-75 opacity-0"
-                    : "top-12 -rotate-3 opacity-100"
-                }`}
-              >
+              <div className="absolute left-1/2 z-20 h-44 w-28 -translate-x-1/2 top-12 -rotate-3 rounded-md border border-yellow-300 bg-yellow-100 opacity-100 shadow-2xl">
                 <div className="p-3">
                   <div className="mb-2 h-2 w-16 rounded bg-slate-800" />
                   <div className="mb-2 h-2 w-20 rounded bg-slate-700" />
