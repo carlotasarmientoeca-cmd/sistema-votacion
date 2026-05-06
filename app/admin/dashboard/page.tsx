@@ -79,14 +79,19 @@ export default function AdminDashboard() {
                 </div>
 
                 <div>
-                  <label className="text-sm font-medium text-slate-700">
-                    Logo
-                  </label>
-                  <input
-                    placeholder="URL o archivo"
-                    className="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500"
-                  />
-                </div>
+  <label className="text-sm font-medium text-slate-700">
+    Logo
+  </label>
+
+  <label className="mt-2 flex cursor-pointer items-center justify-center rounded-2xl border-2 border-dashed border-slate-300 bg-slate-50 px-4 py-6 text-sm font-medium text-slate-500 transition hover:border-blue-400 hover:bg-blue-50">
+    📁 Subir logo
+    <input
+      type="file"
+      accept="image/*"
+      className="hidden"
+    />
+  </label>
+</div>
 
                 <div className="md:col-span-2">
                   <label className="text-sm font-medium text-slate-700">
