@@ -3,6 +3,35 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  --dp-950: #060d1a;
+  --dp-900: #0a1a2f;
+  --dp-800: #0f2440;
+  --dp-700: #162d50;
+  --dp-600: #1e3f6b;
+  --dp-500: #2a5091;
+  --dp-400: #4a78b8;
+  --dp-300: #6f95cc;
+  --dp-200: #a3bde0;
+  --dp-100: #d1def0;
+  --dp-50:  #eaf0f8;
+
+  --bg-page:    #eef2f6;
+  --bg-card:    #ffffff;
+  --bg-subtle:  #f2f5f9;
+  --border:     #d3dce6;
+  --border-2:   #c0cad6;
+  --border-3:   #b3bfcc;
+  --text-heading:  #0e1c2e;
+  --text-body:     #344658;
+  --text-secondary:#5a6f84;
+  --text-muted:    #7c8fa3;
+
+  --success:     #1e7a50;
+  --success-bg:  #e6f4ed;
+  --danger:      #b53b43;
+  --danger-bg:   #fceeef;
+  --danger-hover:#962e35;
 }
 
 @theme inline {
@@ -33,7 +62,7 @@ button, a, input, textarea, select {
 
 button:focus-visible,
 a:focus-visible {
-  outline: 2px solid #003566;
+  outline: 2px solid #162d50;
   outline-offset: 2px;
   border-radius: 0.5rem;
 }
@@ -42,7 +71,7 @@ input:focus-visible,
 textarea:focus-visible,
 select:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 2px #003566;
+  box-shadow: 0 0 0 2px #162d50;
 }
 
 @media (prefers-color-scheme: dark) {

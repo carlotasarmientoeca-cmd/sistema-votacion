@@ -13,26 +13,26 @@ export default function Registro() {
   };
 
   return (
-    <main className="relative flex min-h-screen items-center justify-center bg-[#001d3d] px-6 py-12">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(0,53,102,0.3),transparent_60%)]" />
+    <main className="relative flex min-h-screen items-center justify-center bg-[#0a1a2f] px-6 py-12">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(15,36,64,0.3),transparent_60%)]" />
 
       <section className="relative w-full max-w-md rounded-3xl border border-white/10 bg-white p-8 shadow-2xl">
-        <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#003566]/10">
-          <svg className="h-7 w-7 text-[#003566]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#162d50]/10">
+          <svg className="h-7 w-7 text-[#162d50]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
           </svg>
         </div>
 
-        <h1 className="text-center text-2xl font-extrabold text-[#000814]">
+        <h1 className="text-center text-2xl font-extrabold text-[#0e1c2e]">
           Acceso al proceso de votación
         </h1>
 
-        <p className="mt-2 text-center text-sm text-[#5c677d]">
+        <p className="mt-2 text-center text-sm text-[#5a6f84]">
           Ingresa tu número de identificación para continuar.
         </p>
 
         <div className="mt-6">
-          <label htmlFor="cedula" className="block text-sm font-medium text-[#000814]">
+          <label htmlFor="cedula" className="block text-sm font-medium text-[#0e1c2e]">
             Número de cédula
           </label>
           <input
@@ -41,7 +41,7 @@ export default function Registro() {
             value={cedula}
             onChange={(e) => setCedula(e.target.value)}
             placeholder="Número de identificación"
-            className="mt-2 w-full rounded-xl border border-[#979dac] px-4 py-3 text-black outline-none transition focus:border-[#003566] focus:ring-2 focus:ring-[#003566]"
+            className="mt-2 w-full rounded-xl border border-[#b3bfcc] px-4 py-3 text-[#0e1c2e] outline-none transition focus:border-[#162d50] focus:ring-2 focus:ring-[#162d50]"
           />
         </div>
 
@@ -51,9 +51,9 @@ export default function Registro() {
             onClick={() => setActivarVoz(!activarVoz)}
             className={`flex w-full items-center justify-center gap-3 rounded-2xl border-2 p-4 font-bold transition-all ${
               activarVoz
-                ? "border-green-500 bg-green-50 text-green-700 shadow-inner"
-                : "border-[#979dac]/30 bg-gray-50 text-gray-500 hover:border-[#003566] hover:text-[#003566]"
-            } focus:outline-none focus:ring-4 focus:ring-[#003566]/20`}
+                ? "border-[#1e7a50] bg-[#e6f4ed] text-[#1e7a50] shadow-inner"
+                : "border-[#b3bfcc]/30 bg-[#f2f5f9] text-[#5a6f84] hover:border-[#162d50] hover:text-[#162d50]"
+            } focus:outline-none focus:ring-4 focus:ring-[#162d50]/20`}
           >
             <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               {activarVoz ? (
@@ -74,7 +74,7 @@ export default function Registro() {
 
         <button
           onClick={continuar}
-          className="mt-8 w-full rounded-xl bg-[#003566] py-4 font-bold text-white uppercase tracking-widest shadow-lg shadow-[#003566]/30 transition hover:-translate-y-0.5 hover:bg-[#001d3d] hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-[#003566]/40"
+          className="mt-8 w-full rounded-xl bg-[#162d50] py-4 font-bold text-white uppercase tracking-widest shadow-lg shadow-[#162d50]/30 transition hover:-translate-y-0.5 hover:bg-[#0f2440] hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-[#162d50]/40"
         >
           Continuar
         </button>

@@ -51,13 +51,13 @@ export default function AdminDashboard() {
   };
 
   return (
-    <main className="min-h-screen bg-slate-50">
-      <aside className="fixed left-0 top-0 z-30 hidden h-full w-72 border-r border-slate-200/80 bg-white p-6 lg:block">
+    <main className="min-h-screen bg-[#eef2f6]">
+      <aside className="fixed left-0 top-0 z-30 hidden h-full w-72 border-r border-[#162d50]/30 bg-[#0a1a2f] p-6 lg:block">
         <div>
-          <h1 className="text-2xl font-extrabold tracking-tight text-blue-900">
+          <h1 className="text-2xl font-extrabold tracking-tight text-white">
             VotaSecure
           </h1>
-          <p className="mt-1 text-sm text-slate-500">Panel administrador</p>
+          <p className="mt-1 text-sm text-[#6f95cc]">Panel administrador</p>
         </div>
 
         <nav className="mt-10 space-y-1.5">
@@ -65,8 +65,8 @@ export default function AdminDashboard() {
             onClick={() => setSeccionActiva('partidos')}
             className={`flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left text-sm font-medium transition ${
               seccionActiva === 'partidos'
-                ? 'bg-blue-50 text-blue-700'
-                : 'text-slate-600 hover:bg-slate-50'
+                ? 'bg-[#162d50] text-white shadow-sm shadow-black/20'
+                : 'text-[#a3bde0] hover:bg-[#0f2440] hover:text-white'
             }`}
           >
             <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -79,8 +79,8 @@ export default function AdminDashboard() {
             onClick={() => setSeccionActiva('resultados')}
             className={`flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left text-sm font-medium transition ${
               seccionActiva === 'resultados'
-                ? 'bg-blue-50 text-blue-700'
-                : 'text-slate-600 hover:bg-slate-50'
+                ? 'bg-[#162d50] text-white shadow-sm shadow-black/20'
+                : 'text-[#a3bde0] hover:bg-[#0f2440] hover:text-white'
             }`}
           >
             <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -92,7 +92,7 @@ export default function AdminDashboard() {
 
         <button
           onClick={() => router.push('/admin/login')}
-          className="absolute bottom-6 left-6 right-6 flex items-center justify-center gap-2 rounded-xl bg-red-50 px-4 py-3 text-sm font-semibold text-red-600 transition hover:bg-red-100"
+          className="absolute bottom-6 left-6 right-6 flex items-center justify-center gap-2 rounded-xl bg-[#b53b43]/10 px-4 py-3 text-sm font-semibold text-[#d96c73] transition hover:bg-[#b53b43]/20 hover:text-[#e8848a]"
         >
           <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0118 3h-1.5A2.25 2.25 0 0014.25 5.25V9m0 0h4.5m0 0l-2.25 2.25M18.75 9l-2.25-2.25" />
@@ -102,13 +102,13 @@ export default function AdminDashboard() {
       </aside>
 
       <section className="lg:ml-72">
-        <header className="border-b border-slate-200/80 bg-white px-6 py-5">
+        <header className="border-b border-[#d3dce6]/80 bg-white px-6 py-5 shadow-[0_1px_4px_rgba(22,45,80,0.04)]">
           <div className="mx-auto flex max-w-7xl items-center justify-between">
             <div>
-              <h2 className="text-2xl font-extrabold tracking-tight text-slate-900">
+              <h2 className="text-2xl font-extrabold tracking-tight text-[#162d50]">
                 Administración
               </h2>
-              <p className="mt-1 text-sm text-slate-500">
+              <p className="mt-1 text-sm text-[#5a6f84]">
                 Gestión del proceso electoral.
               </p>
             </div>
@@ -121,8 +121,8 @@ export default function AdminDashboard() {
               onClick={() => setSeccionActiva('partidos')}
               className={`inline-flex items-center gap-2 whitespace-nowrap rounded-full px-5 py-2.5 text-sm font-semibold transition ${
                 seccionActiva === 'partidos'
-                  ? 'bg-blue-600 text-white shadow-md'
-                  : 'bg-white text-slate-600 shadow-sm hover:bg-slate-50'
+                  ? 'bg-[#162d50] text-white shadow-md shadow-[#162d50]/15'
+                  : 'bg-white text-[#5a6f84] shadow-sm hover:bg-[#f2f5f9]'
               }`}
             >
               <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -135,8 +135,8 @@ export default function AdminDashboard() {
               onClick={() => setSeccionActiva('resultados')}
               className={`inline-flex items-center gap-2 whitespace-nowrap rounded-full px-5 py-2.5 text-sm font-semibold transition ${
                 seccionActiva === 'resultados'
-                  ? 'bg-blue-600 text-white shadow-md'
-                  : 'bg-white text-slate-600 shadow-sm hover:bg-slate-50'
+                  ? 'bg-[#162d50] text-white shadow-md shadow-[#162d50]/15'
+                  : 'bg-white text-[#5a6f84] shadow-sm hover:bg-[#f2f5f9]'
               }`}
             >
               <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -148,14 +148,14 @@ export default function AdminDashboard() {
 
           {seccionActiva === 'partidos' ? (
             <div className="grid gap-6 xl:grid-cols-5">
-              <section className="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-sm xl:col-span-3">
-                <h3 className="text-xl font-bold tracking-tight text-slate-900">
+              <section className="rounded-2xl border border-[#d3dce6]/80 border-t-[3px] border-t-[#162d50] bg-white p-6 shadow-sm xl:col-span-3">
+                <h3 className="text-xl font-bold tracking-tight text-[#162d50]">
                   Registrar partido o lista
                 </h3>
 
                 <div className="mt-6 grid gap-4 md:grid-cols-2">
                   <div>
-                    <label htmlFor="nombre-partido" className="text-sm font-medium text-slate-700">
+                    <label htmlFor="nombre-partido" className="text-sm font-medium text-[#344658]">
                       Nombre del partido / lista
                     </label>
                     <input
@@ -163,16 +163,16 @@ export default function AdminDashboard() {
                       value={partidoActual.nombre}
                       onChange={(e) => setPartidoActual({...partidoActual, nombre: e.target.value})}
                       placeholder="Nombre del partido o lista"
-                      className="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+                      className="mt-2 w-full rounded-xl border border-[#c0cad6] px-4 py-3 text-[#0e1c2e] outline-none transition focus:border-[#162d50] focus:ring-2 focus:ring-[#162d50]"
                     />
                   </div>
 
                   <div>
-                    <label className="text-sm font-medium text-slate-700">
+                    <label className="text-sm font-medium text-[#344658]">
                       Logo
                     </label>
 
-                    <label className="mt-2 flex cursor-pointer items-center justify-center rounded-2xl border-2 border-dashed border-slate-300 bg-slate-50 px-4 py-6 text-sm font-medium text-slate-500 transition hover:border-blue-400 hover:bg-blue-50/50">
+                    <label className="mt-2 flex cursor-pointer items-center justify-center rounded-2xl border-2 border-dashed border-[#c0cad6] bg-[#f2f5f9] px-4 py-6 text-sm font-medium text-[#5a6f84] transition hover:border-[#4a78b8] hover:bg-[#eaf0f8]/50">
                       <svg className="mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
                       </svg>
@@ -186,7 +186,7 @@ export default function AdminDashboard() {
                   </div>
 
                   <div className="md:col-span-2">
-                    <label htmlFor="descripcion-partido" className="text-sm font-medium text-slate-700">
+                    <label htmlFor="descripcion-partido" className="text-sm font-medium text-[#344658]">
                       Descripción
                     </label>
                     <textarea
@@ -194,20 +194,20 @@ export default function AdminDashboard() {
                       value={partidoActual.descripcion}
                       onChange={(e) => setPartidoActual({...partidoActual, descripcion: e.target.value})}
                       placeholder="Descripción del partido o lista"
-                      className="mt-2 h-28 w-full rounded-xl border border-slate-300 px-4 py-3 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+                      className="mt-2 h-28 w-full rounded-xl border border-[#c0cad6] px-4 py-3 text-[#0e1c2e] outline-none transition focus:border-[#162d50] focus:ring-2 focus:ring-[#162d50]"
                     />
                   </div>
                 </div>
 
                 <div className="mt-8">
                   <div className="flex items-center justify-between">
-                    <h4 className="text-base font-bold text-slate-900">
+                    <h4 className="text-base font-bold text-[#162d50]">
                       Integrantes / candidatos
                     </h4>
 
                     <button
                       onClick={agregarIntegrante}
-                      className="inline-flex items-center gap-1.5 rounded-xl bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-700 transition hover:bg-blue-100"
+                      className="inline-flex items-center gap-1.5 rounded-xl border border-[#0a1a2f]/20 bg-[#0a1a2f] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#0f2440]"
                     >
                       <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
@@ -218,19 +218,19 @@ export default function AdminDashboard() {
 
                   <div className="mt-4 space-y-4">
                     {partidoActual.integrantes.map((integrante) => (
-                      <div key={integrante.id} className="relative grid gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-4 md:grid-cols-3">
+                      <div key={integrante.id} className="relative grid gap-3 rounded-2xl border border-[#d3dce6] bg-[#f2f5f9] p-4 md:grid-cols-3">
                         <input
                           value={integrante.nombre}
                           onChange={(e) => actualizarIntegrante(integrante.id, 'nombre', e.target.value)}
                           placeholder="Nombre completo"
-                          className="rounded-xl border border-slate-300 px-4 py-3 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+                          className="rounded-xl border border-[#c0cad6] px-4 py-3 text-[#0e1c2e] outline-none transition focus:border-[#162d50] focus:ring-2 focus:ring-[#162d50]"
                         />
 
                         <input
                           value={integrante.cedula}
                           onChange={(e) => actualizarIntegrante(integrante.id, 'cedula', e.target.value)}
                           placeholder="Cédula"
-                          className="rounded-xl border border-slate-300 px-4 py-3 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+                          className="rounded-xl border border-[#c0cad6] px-4 py-3 text-[#0e1c2e] outline-none transition focus:border-[#162d50] focus:ring-2 focus:ring-[#162d50]"
                         />
 
                         <div className="relative">
@@ -238,12 +238,12 @@ export default function AdminDashboard() {
                             value={integrante.cargo}
                             onChange={(e) => actualizarIntegrante(integrante.id, 'cargo', e.target.value)}
                             placeholder="Función / cargo"
-                            className="w-full rounded-xl border border-slate-300 px-4 py-3 pr-8 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+                            className="w-full rounded-xl border border-[#c0cad6] px-4 py-3 pr-8 text-[#0e1c2e] outline-none transition focus:border-[#162d50] focus:ring-2 focus:ring-[#162d50]"
                           />
                           {partidoActual.integrantes.length > 1 && (
                             <button
                               onClick={() => eliminarIntegrante(integrante.id)}
-                              className="absolute -right-1.5 -top-1.5 flex h-6 w-6 items-center justify-center rounded-full bg-red-500 text-xs text-white transition hover:bg-red-600"
+                              className="absolute -right-1.5 -top-1.5 flex h-6 w-6 items-center justify-center rounded-full bg-[#b53b43] text-xs text-white transition hover:bg-[#962e35]"
                               aria-label="Eliminar integrante"
                             >
                               <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
@@ -259,18 +259,18 @@ export default function AdminDashboard() {
 
                 <button
                   disabled
-                  className="mt-6 w-full rounded-2xl bg-blue-600 py-4 font-semibold text-white shadow-lg shadow-blue-600/20 opacity-50 cursor-not-allowed"
+                  className="mt-6 w-full rounded-2xl bg-[#0a1a2f] py-4 font-semibold text-white shadow-lg shadow-[#0a1a2f]/20 opacity-50 cursor-not-allowed"
                 >
                   Guardar partido / lista
                 </button>
 
-                <div className="mt-8 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-                  <h4 className="text-sm font-semibold text-slate-700">
+                <div className="mt-8 rounded-2xl border border-[#d3dce6] bg-[#eaf0f8]/40 p-5 shadow-sm">
+                  <h4 className="text-sm font-semibold text-[#162d50]">
                     Configuración
                   </h4>
 
                   <div className="mt-4 flex items-center justify-between">
-                    <span className="text-sm text-slate-600">
+                    <span className="text-sm text-[#5a6f84]">
                       Permitir voto en blanco
                     </span>
 
@@ -278,8 +278,8 @@ export default function AdminDashboard() {
                       onClick={() => setVotoEnBlanco(!votoEnBlanco)}
                       className={`relative inline-flex h-7 w-12 items-center rounded-full transition ${
                         votoEnBlanco
-                          ? 'bg-green-500'
-                          : 'bg-slate-300'
+                          ? 'bg-[#0a1a2f]'
+                          : 'bg-[#b3bfcc]'
                       }`}
                     >
                       <span
@@ -292,27 +292,27 @@ export default function AdminDashboard() {
                 </div>
               </section>
 
-              <aside className="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-sm xl:col-span-2">
-                <h3 className="text-lg font-bold tracking-tight text-slate-900">
+              <aside className="rounded-2xl border border-[#d3dce6]/80 border-t-[3px] border-t-[#162d50] bg-white p-6 shadow-sm xl:col-span-2">
+                <h3 className="text-lg font-bold tracking-tight text-[#162d50]">
                   Partidos registrados
                 </h3>
 
                 <div className="mt-4 space-y-3">
-                  <div className="flex min-h-72 items-center justify-center rounded-2xl border border-dashed border-slate-300 bg-slate-50 text-center">
-                    <p className="text-sm text-slate-400">
+                  <div className="flex min-h-72 items-center justify-center rounded-2xl border border-dashed border-[#c0cad6] bg-[#f2f5f9] text-center">
+                    <p className="text-sm text-[#7c8fa3]">
                       No hay partidos registrados.
                     </p>
                   </div>
                   <div className="flex gap-2">
                     <button
                       disabled
-                      className="rounded-lg bg-blue-50 px-3 py-1.5 text-xs font-semibold text-blue-700 opacity-50 cursor-not-allowed"
+                      className="rounded-lg bg-[#eaf0f8] px-3 py-1.5 text-xs font-semibold text-[#0a1a2f] opacity-50 cursor-not-allowed"
                     >
                       Editar
                     </button>
                     <button
                       disabled
-                      className="rounded-lg bg-red-50 px-3 py-1.5 text-xs font-semibold text-red-600 opacity-50 cursor-not-allowed"
+                      className="rounded-lg bg-[#fceeef] px-3 py-1.5 text-xs font-semibold text-[#b53b43] opacity-50 cursor-not-allowed"
                     >
                       Eliminar
                     </button>
@@ -321,9 +321,9 @@ export default function AdminDashboard() {
               </aside>
             </div>
           ) : (
-            <section className="rounded-2xl border border-slate-200/80 bg-white p-8 shadow-sm">
-              <h3 className="text-xl font-bold tracking-tight text-slate-900">Resultados</h3>
-              <p className="mt-4 text-sm text-slate-500">No hay resultados disponibles aún.</p>
+            <section className="rounded-2xl border border-[#d3dce6]/80 border-t-[3px] border-t-[#162d50] bg-white p-8 shadow-sm">
+              <h3 className="text-xl font-bold tracking-tight text-[#162d50]">Resultados</h3>
+              <p className="mt-4 text-sm text-[#5a6f84]">No hay resultados disponibles aún.</p>
             </section>
           )}
         </div>
