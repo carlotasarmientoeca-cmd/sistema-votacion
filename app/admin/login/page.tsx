@@ -1,58 +1,73 @@
-'use client';
+"use client";
 
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function AdminLogin() {
   const router = useRouter();
 
-  return (
-    <main className="flex min-h-screen items-center justify-center bg-slate-950 px-6">
-      <section className="w-full max-w-md rounded-[2rem] border border-white/10 bg-white p-8 shadow-2xl">
-        
-        <div className="text-center">
-          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-600 text-3xl text-white">
-            🛡️
-          </div>
+  const [usuario, setUsuario] = useState("");
+  const [password, setPassword] = useState("");
 
-          <h1 className="mt-6 text-3xl font-extrabold text-slate-900">
+  const ingresar = () => {
+    router.push("/admin/dashboard");
+  };
+
+  return (
+    <main className="relative flex min-h-screen items-center justify-center bg-[#001d3d] px-6 py-12">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(0,53,102,0.3),transparent_60%)]" />
+
+      <section className="relative w-full max-w-md rounded-[2rem] border border-white/10 bg-white p-8 shadow-2xl">
+        <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#003566]">
+          <svg className="h-7 w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+          </svg>
+        </div>
+
+        <div className="text-center">
+          <h1 className="text-2xl font-extrabold text-[#000814]">
             Acceso institucional
           </h1>
-
-          <p className="mt-2 text-slate-500">
+          <p className="mt-2 text-sm text-[#5c677d]">
             Accede al panel administrativo.
           </p>
         </div>
 
         <div className="mt-8 space-y-4">
           <div>
-            <label className="text-sm font-medium text-slate-700">
+            <label htmlFor="usuario" className="text-sm font-medium text-[#000814]">
               Usuario
             </label>
             <input
+              id="usuario"
+              value={usuario}
+              onChange={(e) => setUsuario(e.target.value)}
               placeholder="Usuario"
-              className="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3 outline-none transition focus:ring-2 focus:ring-blue-500"
+              className="mt-2 w-full rounded-xl border border-[#979dac] px-4 py-3 outline-none transition focus:border-[#003566] focus:ring-2 focus:ring-[#003566]"
             />
           </div>
 
           <div>
-            <label className="text-sm font-medium text-slate-700">
+            <label htmlFor="password" className="text-sm font-medium text-[#000814]">
               Contraseña
             </label>
             <input
+              id="password"
               type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               placeholder="Contraseña"
-              className="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3 outline-none transition focus:ring-2 focus:ring-blue-500"
+              className="mt-2 w-full rounded-xl border border-[#979dac] px-4 py-3 outline-none transition focus:border-[#003566] focus:ring-2 focus:ring-[#003566]"
             />
           </div>
         </div>
 
         <button
-          onClick={() => router.push('/admin/dashboard')}
-          className="mt-6 w-full rounded-xl bg-blue-600 py-3 font-semibold text-white shadow-lg shadow-blue-600/30 transition hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-xl"
+          onClick={ingresar}
+          className="mt-8 w-full rounded-xl bg-[#003566] py-4 font-bold text-white uppercase tracking-widest shadow-lg shadow-[#003566]/30 transition hover:-translate-y-0.5 hover:bg-[#001d3d] hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-[#003566]/40"
         >
           Ingresar al panel
         </button>
-
       </section>
     </main>
   );

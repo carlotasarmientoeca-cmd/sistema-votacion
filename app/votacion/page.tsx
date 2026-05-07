@@ -1,73 +1,51 @@
-'use client';
+"use client";
+
+import { useRouter } from "next/navigation";
 
 export default function Votacion() {
-  return (
-    <main className="min-h-screen bg-slate-950 text-white">
-      
-      {/* HEADER */}
-      <header className="border-b border-white/10 bg-slate-950/80 px-6 py-5 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl items-center justify-between">
-          <div>
-            <h1 className="text-2xl font-extrabold">VotaSecure</h1>
-            <p className="text-sm text-slate-400">Papeleta digital</p>
-          </div>
+  const router = useRouter();
 
-          <span className="rounded-full border border-blue-400/30 bg-blue-500/10 px-4 py-2 text-sm font-semibold text-blue-300">
-            Proceso activo
-          </span>
+  return (
+    <main className="flex min-h-screen flex-col bg-[#000814]">
+      <header className="border-b border-[#979dac]/20 bg-[#001d3d]/80 px-6 py-5 backdrop-blur">
+        <div className="mx-auto flex max-w-7xl items-center justify-center">
+          <h1 className="text-center text-2xl font-extrabold tracking-tight text-white">
+            VotaSecure
+          </h1>
         </div>
       </header>
 
-      {/* CONTENIDO */}
-      <section className="mx-auto max-w-7xl px-6 py-10">
-        
-        <div className="mb-8 rounded-[2rem] border border-white/10 bg-white/10 p-6 shadow-2xl backdrop-blur">
-          <p className="text-sm font-medium text-blue-300">
-            Selección de voto
-          </p>
+      <div className="flex flex-1 items-center justify-center px-6 py-10">
+        <div className="w-full max-w-7xl overflow-hidden rounded-[2rem] border border-[#979dac]/20 bg-white shadow-2xl">
+          <div className="border-b border-[#979dac]/15 px-6 py-5 sm:px-8">
+            <h2 className="text-center text-xl font-extrabold tracking-tight text-[#000814]">
+              Papeleta Electoral
+            </h2>
+          </div>
 
-          <h2 className="mt-2 text-3xl font-extrabold">
-            Elige una opción
-          </h2>
+          <div className="p-6 sm:p-8">
+            <div
+              className="grid gap-6"
+              style={{
+                gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
+              }}
+              role="radiogroup"
+              aria-label="Lista de partidos electorales"
+            />
+          </div>
 
-          <p className="mt-2 text-slate-300">
-            Selecciona una lista o partido para continuar.
-          </p>
-        </div>
-
-        <div className="grid gap-8 lg:grid-cols-3">
-          
-          {/* LISTA */}
-          <aside className="rounded-[2rem] border border-white/10 bg-white p-6 text-slate-900 shadow-xl">
-            <h3 className="text-xl font-bold">Opciones</h3>
-
-            <div className="mt-6 flex min-h-60 items-center justify-center rounded-2xl border border-dashed border-slate-300 bg-slate-50 text-center">
-              <p className="text-sm text-slate-400">
-                No hay opciones disponibles.
-              </p>
-            </div>
-          </aside>
-
-          {/* DETALLE */}
-          <section className="rounded-[2rem] border border-white/10 bg-white p-8 text-slate-900 shadow-xl lg:col-span-2">
-            
-            <div className="flex flex-col justify-between min-h-72">
-              <div className="flex flex-1 items-center justify-center rounded-2xl border border-dashed border-slate-300 bg-slate-50 text-center">
-                <p className="text-sm text-slate-400">
-                  Selecciona una opción para continuar.
-                </p>
-              </div>
-
+          <div className="border-t border-[#979dac]/15 px-6 py-6 sm:px-8">
+            <div className="mx-auto max-w-sm">
               <button
-                disabled
-                className="mt-6 w-full rounded-2xl py-4 font-bold text-white bg-slate-300 cursor-not-allowed"
+                onClick={() => router.push("/confirmacion")}
+                className="w-full rounded-2xl bg-[#003566] py-5 text-xl font-bold text-white shadow-lg shadow-[#003566]/30 transition-all hover:-translate-y-0.5 hover:bg-[#001d3d] hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-[#003566]/40"
               >
                 Votar
               </button>
             </div>
-          </section>
+          </div>
         </div>
-      </section>
+      </div>
     </main>
   );
 }
