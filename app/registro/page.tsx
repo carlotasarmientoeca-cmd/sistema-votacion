@@ -2,11 +2,12 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useVoiceAssistant } from "@/app/hooks/useVoiceAssistant";
 
 export default function Registro() {
   const router = useRouter();
   const [cedula, setCedula] = useState("");
-  const [activarVoz, setActivarVoz] = useState(false);
+  const { activo, activar, leerPagina } = useVoiceAssistant();
 
   const continuar = () => {
     router.push("/votacion");
@@ -48,15 +49,18 @@ export default function Registro() {
         <div className="mt-8">
           <button
             type="button"
-            onClick={() => setActivarVoz(!activarVoz)}
+            onClick={() => {
+              activar();
+              leerPagina("registro");
+            }}
             className={`flex w-full items-center justify-center gap-3 rounded-2xl border-2 p-4 font-bold transition-all ${
-              activarVoz
+              activo
                 ? "border-[#1e7a50] bg-[#e6f4ed] text-[#1e7a50] shadow-inner"
                 : "border-[#b3bfcc]/30 bg-[#f2f5f9] text-[#5a6f84] hover:border-[#162d50] hover:text-[#162d50]"
             } focus:outline-none focus:ring-4 focus:ring-[#162d50]/20`}
           >
             <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              {activarVoz ? (
+              {activo ? (
                 <>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15.536 8.464a5 5 0 010 7.072M18.364 5.636a9 9 0 010 12.728M12 18a2 2 0 01-2-2v-4a2 2 0 012-2 2 2 0 012 2v4a2 2 0 01-2 2z" />
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v4l-1.5-1.5A2 2 0 0112 8V6z" />
@@ -68,7 +72,7 @@ export default function Registro() {
                 </>
               )}
             </svg>
-            {activarVoz ? "ASISTENCIA DE VOZ ACTIVADA" : "ACTIVAR ASISTENCIA DE VOZ"}
+            {activo ? "ASISTENCIA DE VOZ ACTIVADA" : "ACTIVAR ASISTENCIA DE VOZ"}
           </button>
         </div>
 

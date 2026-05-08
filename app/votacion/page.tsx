@@ -1,13 +1,23 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useVoiceAssistant } from "@/app/hooks/useVoiceAssistant";
 
 export default function Votacion() {
+  const router = useRouter();
   const [animating, setAnimating] = useState(false);
+  const { activo, leerPagina } = useVoiceAssistant();
+
+  useEffect(() => {
+    if (!activo) return;
+    const timer = setTimeout(() => leerPagina("votación"), 600);
+    return () => clearTimeout(timer);
+  }, [activo, leerPagina]);
 
   const handleClick = () => {
     setAnimating(true);
-    setTimeout(() => setAnimating(false), 200);
+    setTimeout(() => router.push("/confirmacion"), 250);
   };
 
   return (
