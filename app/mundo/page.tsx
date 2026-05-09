@@ -280,10 +280,10 @@ export default function MundoPage() {
           Inicio
         </Link>
 
-        <button className="flex items-center gap-2 font-black opacity-80">
-          <Store size={24} />
-          Tienda
-        </button>
+      <Link href="/tienda" className="flex items-center gap-2 font-black opacity-80">
+  <Store size={24} />
+  Tienda
+</Link>
 
         <button className="flex items-center gap-2 font-black opacity-80">
           <User size={24} />

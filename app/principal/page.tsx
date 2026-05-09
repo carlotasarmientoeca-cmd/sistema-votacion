@@ -264,28 +264,33 @@ export default function PrincipalPage() {
 
         {/* FOOTER mobile (< lg) */}
         <footer className="mt-3 flex items-center justify-evenly rounded-[22px] border-2 border-[#5de4d6]/65 bg-[#fff7e6]/70 px-2 py-2 shadow-[0_-2px_12px_rgba(0,0,0,0.05),0_-8px_28px_rgba(0,0,0,0.08),0_-20px_56px_rgba(0,0,0,0.04)] backdrop-blur-lg lg:hidden" style={{ height: "68px" }}>
-          {[
-            { icon: House, label: "Inicio", active: true },
-            { icon: Store, label: "Tienda" },
-            { icon: UserCircle2, label: "Perfil" },
-            { icon: Trophy, label: "Ranking" },
-          ].map(({ icon: Icon, label, active }) => (
-            <button
-              key={label}
+         {[
+  { icon: House, label: "Inicio", active: true },
+  { icon: Store, label: "Tienda", href: "/tienda" },
+  { icon: UserCircle2, label: "Perfil" },
+  { icon: Trophy, label: "Ranking" },
+].map((item) => {
+  const Icon = item.icon;
+
+  return (
+            <Link
+  href={item.href || "#"}
+              key={item.label}
               type="button"
               className={`flex flex-col items-center gap-0.5 rounded-xl px-3 py-1 transition hover:bg-[#b7ad9d]/30 md:flex-row md:gap-2 md:px-6 md:py-1.5 ${
-                active ? "text-[#0ea98e]" : "text-[#6b6258]"
+                item.active ? "text-[#0ea98e]" : "text-[#6b6258]"
               }`}
             >
               <Icon
                 size={18}
-                className={`${active ? "drop-shadow-[0_0_8px_rgba(14,169,142,0.3)]" : ""}`}
+                className={`${item.active ? "drop-shadow-[0_0_8px_rgba(14,169,142,0.3)]" : ""}`}
               />
-              <span className={`text-[9px] font-bold ${active ? "drop-shadow" : ""}`}>
-                {label}
+              <span className={`text-[9px] font-bold ${item.active ? "drop-shadow" : ""}`}>
+                {item.label}
               </span>
-            </button>
-          ))}
+            </Link>
+          );
+})}
         </footer>
       </div>
 
@@ -309,26 +314,31 @@ export default function PrincipalPage() {
       <footer className="absolute bottom-4 left-1/2 z-30 hidden w-[92%] max-w-[1600px] -translate-x-1/2 items-center justify-evenly rounded-[22px] border-2 border-[#5de4d6]/65 bg-[#fff7e6]/70 px-2 shadow-[0_-2px_12px_rgba(0,0,0,0.05),0_-8px_28px_rgba(0,0,0,0.08),0_-20px_56px_rgba(0,0,0,0.04)] backdrop-blur-lg lg:flex" style={{ height: "64px" }}>
         {[
           { icon: House, label: "Inicio", active: true },
-          { icon: Store, label: "Tienda" },
+          { icon: Store, label: "Tienda", href: "/tienda" },
           { icon: UserCircle2, label: "Perfil" },
           { icon: Trophy, label: "Ranking" },
-        ].map(({ icon: Icon, label, active }) => (
-          <button
-            key={label}
+        ].map((item) => {
+  const Icon = item.icon;
+
+  return (
+         <Link
+  href={item.href || "#"}
+            key={item.label}
             type="button"
             className={`flex cursor-pointer flex-col items-center gap-0.5 rounded-xl px-4 py-1 transition-all duration-300 ease-out md:flex-row md:gap-2 md:px-8 md:py-1.5 lg:gap-2 lg:px-10 ${
-              active ? "text-[#0ea98e]" : "text-[#6b6258]"
+              item.active ? "text-[#0ea98e]" : "text-[#6b6258]"
             } hover:scale-[1.04] hover:brightness-105 hover:shadow-[0_0_20px_rgba(55,224,201,0.08)]`}
           >
             <Icon
               size={18}
-              className={`lg:h-5 lg:w-5 ${active ? "drop-shadow-[0_0_8px_rgba(14,169,142,0.3)]" : ""}`}
+              className={`lg:h-5 lg:w-5 ${item.active ? "drop-shadow-[0_0_8px_rgba(14,169,142,0.3)]" : ""}`}
             />
-            <span className={`text-[9px] font-bold md:text-xs ${active ? "drop-shadow" : ""}`}>
-              {label}
+            <span className={`text-[9px] font-bold md:text-xs ${item.active ? "drop-shadow" : ""}`}>
+              {item.label}
             </span>
-          </button>
-        ))}
+          </Link>
+          );
+})}
       </footer>
     </main>
   );
