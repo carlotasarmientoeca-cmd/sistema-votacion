@@ -23,8 +23,8 @@ const islands = [
     slug: "deportes",
     name: "Isla de Deportes",
     image: "/islands/isla2-deporte.png",
-    tasksDone: 5,
-    competitions: 3,
+    tasksDone: 0,
+    competitions: 0,
   },
   {
     id: 2,
@@ -32,23 +32,23 @@ const islands = [
     name: "Isla de Medica",
     image: "/islands/isla-medica.png",
     tasksDone: 0,
-    competitions: 1,
+    competitions: 0,
   },
   {
     id: 3,
     slug: "ingenieria",
     name: "Isla de Ingeniería",
     image: "/islands/isla-ingenieria.png",
-    tasksDone: 2,
-    competitions: 2,
+    tasksDone: 0,
+    competitions: 0,
   },
   {
     id: 4,
     slug: "sociales",
     name: "Isla de Sociales",
     image: "/islands/isla-sociales.png",
-    tasksDone: 1,
-    competitions: 1,
+    tasksDone: 0,
+    competitions: 0,
   },
 ];
 
@@ -90,12 +90,12 @@ export default function MundoPage() {
 
           <div>
             <div className="flex items-center gap-2 text-sm font-black">
-              <span>NV. 5</span>
-              <span className="text-yellow-500">⚡</span>
-              <span>250/500 XP</span>
+            <span>NV. 0</span>
+            <span className="text-yellow-500">⚡</span>
+            <span>0/100 XP</span>
             </div>
             <div className="mt-2 h-2 w-40 rounded-full bg-[#9b9484]">
-              <div className="h-full w-[45%] rounded-full bg-[#26d3bd]" />
+              <div className="h-full w-0 rounded-full bg-[#26d3bd]" />
             </div>
           </div>
         </div>
@@ -103,12 +103,12 @@ export default function MundoPage() {
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2 rounded-xl bg-[#5b4a3d] px-5 py-3 font-black text-white shadow-lg">
             <Coins size={18} className="text-yellow-300" />
-            250
+            0
           </div>
 
           <div className="flex items-center gap-2 rounded-xl bg-[#5b4a3d] px-5 py-3 font-black text-white shadow-lg">
             <Gem size={18} className="text-cyan-300" />
-            12
+            0
           </div>
 
           <button className="grid h-12 w-12 place-items-center rounded-xl bg-[#5b4a3d] text-white shadow-lg transition hover:scale-105">

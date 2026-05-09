@@ -3,12 +3,6 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 
-const packs = [
-  { coins: 100, tokens: 1 },
-  { coins: 250, tokens: 3 },
-  { coins: 500, tokens: 7 },
-];
-
 export default function TiendaPage() {
   return (
     <main className="relative h-screen w-full overflow-hidden bg-black">
@@ -22,7 +16,7 @@ export default function TiendaPage() {
     <span className="text-3xl">🪙</span>
     <div>
       <p className="text-xs font-black uppercase text-[#f4c866]">Monedas</p>
-      <p className="text-2xl font-black text-white">250</p>
+      <p className="text-2xl font-black text-white">0</p>
     </div>
   </div>
 
@@ -34,7 +28,7 @@ export default function TiendaPage() {
 />
     <div>
       <p className="text-xs font-black uppercase text-[#37e0c9]">Tokens</p>
-      <p className="text-2xl font-black text-white">12</p>
+      <p className="text-2xl font-black text-white">0</p>
     </div>
   </div>
 </div>

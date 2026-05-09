@@ -78,12 +78,12 @@ export default function PrincipalPage() {
           </div>
           <div>
             <div className="flex items-center gap-1.5">
-              <p className="text-xs font-black uppercase tracking-wider text-[#6b4f2e] drop-shadow">Nv. 5</p>
+              <p className="text-xs font-black uppercase tracking-wider text-[#6b4f2e] drop-shadow">Nv. 0</p>
               <Zap size={14} className="text-[#f4b83f]" />
-              <span className="text-xs font-bold text-[#4d443c]">250/500 XP</span>
+              <span className="text-xs font-bold text-[#4d443c]">0/100 XP</span>
             </div>
               <div className="mt-1 h-1.5 w-32 overflow-hidden rounded-full bg-[#b7ad9d] shadow-[inset_0_1px_3px_rgba(0,0,0,0.15)]">
-              <div className="h-full w-[45%] rounded-full bg-gradient-to-r from-[#37e0c9] to-[#0ea98e] shadow-[0_0_8px_rgba(55,224,201,0.35),0_0_16px_rgba(55,224,201,0.15)]" />
+              <div className="h-full w-0 rounded-full bg-gradient-to-r from-[#37e0c9] to-[#0ea98e] shadow-[0_0_8px_rgba(55,224,201,0.35),0_0_16px_rgba(55,224,201,0.15)]" />
             </div>
           </div>
         </div>
@@ -91,11 +91,11 @@ export default function PrincipalPage() {
           <div className="flex items-center gap-3">
             <div className="flex cursor-pointer items-center gap-1.5 rounded-xl border-2 border-[#6b4f2e]/40 bg-[#4d443c] px-3 py-2 shadow-inner transition-all duration-300 ease-out hover:scale-[1.05] hover:brightness-110 hover:shadow-[inset_0_2px_0_rgba(255,255,255,0.08),0_0_12px_rgba(244,184,63,0.2)]">
               <Coins className="text-[#f4b83f] drop-shadow" size={16} />
-              <span className="text-sm font-bold text-[#fff7e6] drop-shadow">250</span>
+              <span className="text-sm font-bold text-[#fff7e6] drop-shadow">0</span>
             </div>
             <div className="flex cursor-pointer items-center gap-1.5 rounded-xl border-2 border-[#6b4f2e]/40 bg-[#4d443c] px-3 py-2 shadow-inner transition-all duration-300 ease-out hover:scale-[1.05] hover:brightness-110 hover:shadow-[inset_0_2px_0_rgba(255,255,255,0.08),0_0_12px_rgba(55,224,201,0.2)]">
               <Gem className="text-[#37e0c9] drop-shadow" size={16} />
-              <span className="text-sm font-bold text-[#fff7e6] drop-shadow">12</span>
+              <span className="text-sm font-bold text-[#fff7e6] drop-shadow">0</span>
             </div>
             <button
               type="button"
@@ -117,12 +117,12 @@ export default function PrincipalPage() {
             </div>
             <div>
               <div className="flex items-center gap-1.5">
-                <p className="text-[10px] font-black uppercase tracking-wider text-[#6b4f2e] drop-shadow">Nv. 5</p>
+                <p className="text-[10px] font-black uppercase tracking-wider text-[#6b4f2e] drop-shadow">Nv. 0</p>
                 <Zap size={12} className="text-[#f4b83f]" />
-                <span className="text-[10px] font-bold text-[#4d443c]">250/500 XP</span>
+                <span className="text-[10px] font-bold text-[#4d443c]">0/100 XP</span>
               </div>
               <div className="mt-1 h-1.5 w-28 overflow-hidden rounded-full bg-[#b7ad9d] shadow-[inset_0_1px_3px_rgba(0,0,0,0.15)]">
-                <div className="h-full w-[45%] rounded-full bg-gradient-to-r from-[#37e0c9] to-[#0ea98e] shadow-[0_0_8px_rgba(55,224,201,0.35),0_0_16px_rgba(55,224,201,0.15)]" />
+                <div className="h-full w-0 rounded-full bg-gradient-to-r from-[#37e0c9] to-[#0ea98e] shadow-[0_0_8px_rgba(55,224,201,0.35),0_0_16px_rgba(55,224,201,0.15)]" />
               </div>
             </div>
           </div>
@@ -130,11 +130,11 @@ export default function PrincipalPage() {
           <div className="flex items-center gap-2">
             <div className="flex items-center gap-1 rounded-lg border-2 border-[#6b4f2e]/40 bg-[#4d443c] px-2.5 py-1.5 shadow-inner">
               <Coins className="text-[#f4b83f] drop-shadow" size={14} />
-              <span className="text-xs font-bold text-[#fff7e6] drop-shadow">250</span>
+              <span className="text-xs font-bold text-[#fff7e6] drop-shadow">0</span>
             </div>
             <div className="flex items-center gap-1 rounded-lg border-2 border-[#6b4f2e]/40 bg-[#4d443c] px-2.5 py-1.5 shadow-inner">
               <Gem className="text-[#37e0c9] drop-shadow" size={14} />
-              <span className="text-xs font-bold text-[#fff7e6] drop-shadow">12</span>
+              <span className="text-xs font-bold text-[#fff7e6] drop-shadow">0</span>
             </div>
             <button
               type="button"
@@ -162,15 +162,15 @@ export default function PrincipalPage() {
                 <UserCircle2 className="text-white drop-shadow" size={28} />
               </div>
               <div className="min-w-0 lg:mt-3">
-                <h2 className="truncate text-sm font-black text-[#201c18] drop-shadow-sm lg:text-lg">Carlota Sarmiento</h2>
+                <h2 className="truncate text-sm font-black text-[#201c18] drop-shadow-sm lg:text-lg">Jugador</h2>
                 <hr className="mx-auto mt-1 hidden w-12 border-t border-[#f4b83f]/30 lg:block" />
-                <p className="truncate text-xs text-[#4d443c] lg:mt-1.5 lg:text-sm lg:font-medium">usuario@universidad.edu</p>
+                <p className="truncate text-xs text-[#4d443c] lg:mt-1.5 lg:text-sm lg:font-medium">---</p>
               </div>
               <div className="ml-auto flex shrink-0 cursor-pointer items-center gap-1.5 rounded-xl border-2 border-[#f4b83f]/60 bg-gradient-to-b from-[#f4b83f]/15 to-[#d4a44a]/10 bg-[#4d443c] px-3 py-1 shadow-[inset_0_2px_0_rgba(255,255,255,0.12),0_4px_12px_rgba(58,46,34,0.3),0_8px_24px_rgba(58,46,34,0.12),0_0_16px_rgba(244,184,63,0.08)] transition-all duration-300 ease-out lg:ml-0 lg:mt-5 lg:w-full lg:justify-center lg:py-2.5 hover:scale-[1.04] hover:brightness-110 hover:shadow-[inset_0_2px_0_rgba(255,255,255,0.12),0_4px_12px_rgba(58,46,34,0.35),0_8px_24px_rgba(58,46,34,0.15),0_0_32px_rgba(244,184,63,0.3),0_0_60px_rgba(244,184,63,0.08)]">
                 <Trophy className="text-[#f4b83f] drop-shadow-[0_0_8px_rgba(244,184,63,0.3)]" size={16} />
                 <div>
                   <p className="text-[10px] font-black text-[#d4a44a] drop-shadow tracking-wider">PUNTOS</p>
-                  <p className="text-xs font-black text-[#fff7e6] drop-shadow">1,250</p>
+                  <p className="text-xs font-black text-[#fff7e6] drop-shadow">0</p>
                 </div>
               </div>
             </section>
@@ -216,11 +216,11 @@ export default function PrincipalPage() {
                 <p className="text-xs font-black text-[#6b4f2e] drop-shadow">PASE DE BATALLA</p>
               </div>
               <div className="mb-1.5 h-2 overflow-hidden rounded-full bg-[#b7ad9d] shadow-inner">
-                <div className="h-full w-[35%] rounded-full bg-gradient-to-r from-[#37e0c9] to-[#0ea98e] shadow-[0_0_8px_rgba(55,224,201,0.4)]" />
+                <div className="h-full w-0 rounded-full bg-gradient-to-r from-[#37e0c9] to-[#0ea98e] shadow-[0_0_8px_rgba(55,224,201,0.4)]" />
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-xs font-medium text-[#4d443c]">Nivel 4</span>
-                <span className="text-xs font-bold text-[#0ea98e]">35/100</span>
+                <span className="text-xs font-medium text-[#4d443c]">Nivel 0</span>
+                <span className="text-xs font-bold text-[#0ea98e]">0/100</span>
               </div>
               <button
                 type="button"
@@ -240,8 +240,8 @@ export default function PrincipalPage() {
               <p className="mb-3 text-xs font-black text-[#6b4f2e] drop-shadow">MISIONES</p>
               <div className="space-y-3">
                 {[
-                  { task: "Visitar 3 islas", prog: "2/3", pct: 66 },
-                  { task: "Ganar 100 monedas", prog: "50/100", pct: 50 },
+                  { task: "Visitar 3 islas", prog: "0/3", pct: 0 },
+                  { task: "Ganar 100 monedas", prog: "0/100", pct: 0 },
                 ].map((m, i) => (
                   <div key={i}>
                     <div className="mb-0.5 flex items-center justify-between">
