@@ -13,7 +13,6 @@ import {
   Store,
   User,
   Menu,
-  Gem,
   Coins,
 } from "lucide-react";
 
@@ -102,12 +101,12 @@ export default function MundoPage() {
 
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2 rounded-xl bg-[#5b4a3d] px-5 py-3 font-black text-white shadow-lg">
-            <Coins size={18} className="text-yellow-300" />
+            <Coins size={30} className="text-yellow-300" />
             0
           </div>
 
-          <div className="flex items-center gap-2 rounded-xl bg-[#5b4a3d] px-5 py-3 font-black text-white shadow-lg">
-            <Gem size={18} className="text-cyan-300" />
+          <div className="flex items-center gap-5 rounded-xl bg-[#5b4a3d] px-5 py-3 font-black text-white shadow-lg">
+            <img src="/token.png" alt="Token" className="h-[30px] w-[30px] object-contain" />
             0
           </div>
 
@@ -177,7 +176,7 @@ export default function MundoPage() {
                   <button
                     onClick={() => {
                       if (isActive) {
-                        window.location.href = `/mundo/${island.slug}`;
+                        window.location.href = `/tareas/${island.slug}`;
                       } else {
                         setActiveIndex(index);
                       }

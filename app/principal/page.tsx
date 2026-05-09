@@ -4,7 +4,6 @@ import Link from "next/link";
 import {
   Menu,
   Coins,
-  Gem,
   House,
   Store,
   UserCircle2,
@@ -89,19 +88,19 @@ export default function PrincipalPage() {
         </div>
 
           <div className="flex items-center gap-3">
-            <div className="flex cursor-pointer items-center gap-1.5 rounded-xl border-2 border-[#6b4f2e]/40 bg-[#4d443c] px-3 py-2 shadow-inner transition-all duration-300 ease-out hover:scale-[1.05] hover:brightness-110 hover:shadow-[inset_0_2px_0_rgba(255,255,255,0.08),0_0_12px_rgba(244,184,63,0.2)]">
-              <Coins className="text-[#f4b83f] drop-shadow" size={16} />
+            <div className="flex cursor-pointer items-center gap-1.5 rounded-xl border-2 border-[#6b4f2e]/40 bg-[#4d443c] px-5 py-2 shadow-inner transition-all duration-300 ease-out hover:scale-[1.05] hover:brightness-110 hover:shadow-[inset_0_2px_0_rgba(255,255,255,0.08),0_0_12px_rgba(244,184,63,0.2)]">
+              <Coins className="text-[#f4b83f] drop-shadow" size={34} />
               <span className="text-sm font-bold text-[#fff7e6] drop-shadow">0</span>
             </div>
-            <div className="flex cursor-pointer items-center gap-1.5 rounded-xl border-2 border-[#6b4f2e]/40 bg-[#4d443c] px-3 py-2 shadow-inner transition-all duration-300 ease-out hover:scale-[1.05] hover:brightness-110 hover:shadow-[inset_0_2px_0_rgba(255,255,255,0.08),0_0_12px_rgba(55,224,201,0.2)]">
-              <Gem className="text-[#37e0c9] drop-shadow" size={16} />
+            <div className="flex cursor-pointer items-center gap-1.5 rounded-xl border-2 border-[#6b4f2e]/40 bg-[#4d443c] px-5 py-2 shadow-inner transition-all duration-300 ease-out hover:scale-[1.05] hover:brightness-110 hover:shadow-[inset_0_2px_0_rgba(255,255,255,0.08),0_0_12px_rgba(55,224,201,0.2)]">
+              <img src="/token.png" alt="Token" className="h-8 w-20 object-contain drop-shadow"  />
               <span className="text-sm font-bold text-[#fff7e6] drop-shadow">0</span>
             </div>
             <button
               type="button"
               className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl border-2 border-[#6b6258] bg-[#4d443c] shadow-inner transition-all duration-300 ease-out hover:scale-[1.05] hover:brightness-110 hover:shadow-[0_0_12px_rgba(255,255,255,0.1)] active:scale-90"
             >
-              <Menu className="text-[#fff7e6] drop-shadow" size={18} />
+              <Menu className="text-[#fff7e6] drop-shadow" size={34} />
             </button>
           </div>
       </header>
@@ -133,7 +132,7 @@ export default function PrincipalPage() {
               <span className="text-xs font-bold text-[#fff7e6] drop-shadow">0</span>
             </div>
             <div className="flex items-center gap-1 rounded-lg border-2 border-[#6b4f2e]/40 bg-[#4d443c] px-2.5 py-1.5 shadow-inner">
-              <Gem className="text-[#37e0c9] drop-shadow" size={14} />
+              <img src="/token.png" alt="Token" className="h-[14px] w-[14px] object-contain drop-shadow" />
               <span className="text-xs font-bold text-[#fff7e6] drop-shadow">0</span>
             </div>
             <button
