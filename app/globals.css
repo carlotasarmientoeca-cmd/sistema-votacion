@@ -80,3 +80,63 @@ select:focus-visible {
     --foreground: #ededed;
   }
 }
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* === Ambiente premium fantasy jungle === */
+
+@keyframes floatParticle {
+  0%, 100% { transform: translateY(0px) translateX(0px); opacity: 0; }
+  10% { opacity: 0.35; }
+  30% { transform: translateY(-15px) translateX(10px); opacity: 0.5; }
+  50% { transform: translateY(-30px) translateX(-6px); opacity: 0.4; }
+  70% { transform: translateY(-18px) translateX(14px); opacity: 0.45; }
+  90% { opacity: 0.2; }
+  100% { transform: translateY(-36px) translateX(6px); opacity: 0; }
+}
+
+@keyframes slowDrift {
+  0%, 100% { transform: translateX(0px) rotate(var(--drift-start, 0deg)); }
+  50% { transform: translateX(30px) rotate(var(--drift-end, 6deg)); }
+}
+
+@keyframes ambientGlow {
+  0%, 100% { opacity: 0.35; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.08); }
+}
+
+@keyframes softPulse {
+  0%, 100% { opacity: 0.12; }
+  50% { opacity: 0.28; }
+}
+
+.animate-floatParticle {
+  animation: floatParticle var(--particle-dur, 9s) ease-in-out infinite;
+}
+
+.animate-slowDrift {
+  animation: slowDrift var(--drift-dur, 18s) ease-in-out infinite;
+}
+
+.animate-ambientGlow {
+  animation: ambientGlow 5s ease-in-out infinite;
+}
+
+.animate-softPulse {
+  animation: softPulse 4s ease-in-out infinite;
+}
